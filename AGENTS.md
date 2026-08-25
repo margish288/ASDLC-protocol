@@ -17,7 +17,7 @@ Before making changes, read these files:
 7. `multiagent/protocol.md`
 8. `multiagent/policies/permissions.md`
 9. `multiagent/policies/decomposition.md` when triaging or splitting requirements
-10. Relevant task file in `multiagent/tasks/`
+10. Relevant GitHub Issue via `gh issue view`; read a local task file only when one exists for an approved exception case
 
 ## Template Summary
 
@@ -45,12 +45,26 @@ This protocol must be tailored to the target repository when installed. Replace 
 - `[IMPORTANT_TEST_FOLDER]`
 - `[KNOWN_ABSENCES_OR_LIMITATIONS]`
 
+## Primary Source Of Truth
+
+GitHub is the primary source of truth for target repository work. Agents must use GitHub Issues, issue labels, issue body/description, issue comments, linked sub-issues, PRs, and PR comments as the authoritative work record.
+
+Agents should use `gh` commands to fetch, inspect, claim, update, comment on, and link issues and PRs when GitHub access is available. Agents must not create local task files for every GitHub Issue by default.
+
+If GitHub cannot be reached or the agent cannot update issue bodies, labels, comments, PRs, or linked sub-issues, do not silently substitute local task files. Ask for access, mark the GitHub Issue blocked when possible, or use a local task file only when the work matches an allowed exception.
+
+Use `multiagent/tasks/` only for:
+
+- repo-only tasks without GitHub Issues
+- temporary local planning
+- explicit human request
+- complex handoff that needs repo-local durable notes
+
+Local task files are supplemental notes only. They must not replace or override GitHub labels, issue bodies, issue comments, PRs, or linked sub-issues.
+
 ## Agent Workflow
 
-Agents must work from either:
-
-1. A GitHub Issue labeled `agent:ready`, or
-2. A repo-local task file in `multiagent/tasks/`.
+Agents must work from a GitHub Issue labeled `agent:ready` unless the work falls under an allowed `multiagent/tasks/` exception.
 
 ## Requirement Analysis Before Implementation
 
@@ -69,9 +83,9 @@ Use issue points for estimation:
 1 issue point = 1 hour of expected implementation, verification, and documentation work
 ```
 
-Agents must not implement vague, oversized, or conflicting requirements. Research must happen before implementation, issue splitting, or sub-issue creation. Research includes reading the issue or task, relevant repo docs, affected code, tests, dependencies, and prior local task context when available.
+Agents must not implement vague, oversized, or conflicting requirements. Research must happen before implementation, issue splitting, or sub-issue creation. Research includes reading the GitHub Issue body and comments, relevant repo docs, affected code, tests, dependencies, and permitted local task context when available.
 
-After research, agents must record a concise research summary in the parent issue description or repo-local task file.
+After research, agents must record a concise research summary in the parent GitHub Issue description. Use a repo-local task file only for an allowed exception.
 
 An issue estimated over 8 issue points is oversized. Oversized issues must be divided into multiple separate implementation issues before implementation, not into execution sub-issues. Each implementation issue must be estimated at 8 issue points or less, linked from the parent issue, and worked independently.
 
@@ -101,8 +115,8 @@ Default flow:
 
 1. Pull latest code when network and repository permissions allow.
 2. Read required context files.
-3. Find the highest-priority issue or task that is ready for triage or implementation.
-4. Research the issue or task and record findings in the parent issue description or task file.
+3. Find the highest-priority GitHub Issue that is ready for triage or implementation.
+4. Research the issue and record findings in the parent GitHub Issue description.
 5. Classify the requirement using `multiagent/protocol.md`.
 6. Ask questions, mark blocked, or split the issue when it is not ready.
 7. If the issue is over 8 issue points, create separate linked implementation issues and keep the parent as the tracking issue.
@@ -111,9 +125,9 @@ Default flow:
 10. Create an approved work branch.
 11. Implement only the scoped sub-issue or implementation issue.
 12. Run relevant checks.
-13. Update issue descriptions and task file, then append a new one-line work log entry with evidence.
+13. Update GitHub Issue descriptions/comments, PRs, and linked sub-issues, then append a new one-line work log entry with evidence if the target repository uses work logs.
 14. Open PR or leave handoff.
-15. Move task status forward only when linked implementation issues or execution sub-issues are complete.
+15. Move GitHub Issue status forward only when linked implementation issues or execution sub-issues are complete.
 
 ## Branch Naming
 
@@ -153,21 +167,21 @@ Before editing code, the agent must understand:
 
 ## Definition Of Done
 
-A task may only be marked `done` or `review` when:
+An issue or allowed local task may only be marked `done` or `review` when:
 
 - acceptance criteria are satisfied
 - relevant tests/checks were run
-- changed files are listed in the task file
-- done evidence is written
+- changed files and verification evidence are recorded in the GitHub Issue or PR
+- done evidence is written in the GitHub Issue or PR
 - parent issue and sub-issue descriptions include findings, fixes, and verification evidence
 - all linked implementation issues and execution sub-issues are done before the parent is marked done
 - a new append-only entry is added to `multiagent/logs/<YYYY-MM>.md`
-- GitHub Issue or task status is updated
+- GitHub Issue status is updated
 - PR is opened if code changed
 
 ## Work Log Rules
 
-Work logs are append-only. Agents must add a new log line for every meaningful issue/task event and status transition, including `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues or `ready`, `in_progress`, `review`, and `done` for repo-local tasks.
+Work logs are append-only supplemental audit history. They do not replace GitHub as the source of truth. Agents must add a new log line for every meaningful issue/task event and status transition, including `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues or `ready`, `in_progress`, `review`, and `done` for repo-local tasks.
 
 Agents must never edit, replace, collapse, delete, or rewrite previous log entries for the same issue or task. Multiple log lines for the same issue or task are expected and required because they preserve the chronological history of the work.
 
@@ -201,7 +215,7 @@ Ask for human approval before:
 
 ## Handoff Requirement
 
-If work is incomplete, update the task file and create a handoff in `multiagent/handoffs/`.
+If work is incomplete, update the GitHub Issue and PR with handoff context. Create a repo-local handoff in `multiagent/handoffs/` only for complex handoffs that need durable notes beyond GitHub or when explicitly requested.
 
 The handoff must include:
 

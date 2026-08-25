@@ -27,7 +27,7 @@ This repository does not aim to:
 
 ## Important External Systems
 
-- GitHub: target repositories may use GitHub Issues and PRs with this protocol.
+- GitHub: target repositories use GitHub Issues and PRs as the authoritative work record with this protocol.
 - Database: none.
 - APIs: none.
 - Deployment: none.

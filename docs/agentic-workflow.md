@@ -22,7 +22,7 @@ Read:
 2. `multiagent/README.md`
 3. `multiagent/policies/task-status.md`
 
-Use this step to understand GitHub labels, task statuses, priority order, issue points, and the lifecycle from triage to done.
+Use this step to understand GitHub labels, optional local task statuses, priority order, issue points, and the lifecycle from triage to done.
 
 ### 3. Before Triaging A GitHub Issue
 
@@ -36,7 +36,7 @@ Read:
 
 Use this step to classify the issue as `agent:ready`, `agent:needs-clarification`, `agent:needs-breakdown`, `agent:blocked`, or `agent:split`.
 
-Research before creating issues, creating sub-issues, or coding. Record the research summary in the source issue description or repo-local task file.
+Research before creating issues, creating sub-issues, or coding. Record the research summary in the source GitHub Issue description. Use a repo-local task file only for an approved exception.
 
 Do not code during triage.
 
@@ -44,7 +44,7 @@ Do not code during triage.
 
 Read:
 
-1. The ready GitHub Issue or local task file
+1. The ready GitHub Issue via `gh issue view`
 2. `docs/setup.md`
 3. `docs/testing.md`
 4. `docs/conventions.md`
@@ -53,7 +53,7 @@ Read:
 
 Use this step to confirm the goal, acceptance criteria, affected area, issue points, verification expectation, dependencies, approval requirements, and linked sub-issue plan.
 
-Only claim implementation work labeled `agent:ready` or a local task with `status: ready`. The claimed issue must be estimated at 8 issue points or less.
+Only claim implementation work from a GitHub Issue labeled `agent:ready`. The claimed issue must be estimated at 8 issue points or less. Use a local task only for repo-only work without a GitHub Issue, temporary local planning, explicit human request, or complex handoff notes.
 
 ### 5. Before Editing Code
 
@@ -71,7 +71,7 @@ Use this step to understand local patterns before making changes.
 
 ### 6. While Working
 
-Keep the active task file in `multiagent/tasks/` updated with discoveries, scope changes, changed files, and test findings.
+Keep the GitHub Issue and PR updated with discoveries, scope changes, changed files, and test findings. Update a local task file only when the work falls under an allowed `multiagent/tasks/` exception.
 
 Keep GitHub Issue descriptions updated when permissions allow:
 
@@ -92,7 +92,7 @@ Read:
 
 1. `docs/testing.md`
 2. `multiagent/policies/testing.md`
-3. The active task file
+3. The active GitHub Issue and PR; read a local task file only when one exists for an approved exception
 4. `multiagent/templates/changelog-entry-template.md`
 5. `multiagent/logs/README.md`
 

@@ -1,6 +1,6 @@
 # Work Logs
 
-In a target repository, keep one-line chronological task entries here. Work logs are append-only.
+In a target repository, keep one-line chronological task entries here. Work logs are append-only supplemental audit history. They do not replace GitHub as the source of truth.
 
 In this protocol-template repository, do not create real monthly work log files. Keep only this README and reusable monthly templates such as `YYYY-MM.md`.
 

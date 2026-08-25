@@ -13,7 +13,9 @@ Agents may do these without approval when scoped to the active task:
 - create separate implementation issues from a researched oversized parent requirement
 - create linked execution sub-issues from a researched ready implementation issue
 - update non-terminal GitHub triage labels
-- update task files
+- update GitHub Issue bodies and comments
+- update PR descriptions and comments
+- create or update local task files only for allowed `multiagent/tasks/` exceptions
 - append one-line work log entries
 - add handoff notes
 - run local test/build/lint commands
@@ -24,7 +26,7 @@ Green actions do not include committing or pushing directly to parent branches. 
 
 ## Yellow Actions
 
-Agents may do these only with written justification in the task file:
+Agents may do these only with written justification in the GitHub Issue or PR. Use a local task file only for an allowed `multiagent/tasks/` exception:
 
 - refactor shared abstractions
 - modify config files

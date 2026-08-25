@@ -17,6 +17,10 @@ updated_at: YYYY-MM-DD
 
 # GH-000: Task Title
 
+Use this template only for allowed `multiagent/tasks/` exceptions: repo-only tasks without GitHub Issues, temporary local planning, explicit human request, or complex handoff notes. Do not create a local task file for every GitHub Issue by default.
+
+GitHub Issues, labels, issue bodies, comments, linked sub-issues, PRs, and PR comments remain authoritative.
+
 ## Goal
 
 Describe the outcome this task should achieve.

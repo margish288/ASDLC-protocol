@@ -1,6 +1,8 @@
 # Task Status Policy
 
-## Statuses
+## Local Task Statuses
+
+GitHub labels are authoritative for normal work. These local statuses apply only to allowed `multiagent/tasks/` exception files.
 
 `backlog`
 
@@ -93,7 +95,9 @@ Issues labeled `issue-points:over-8` should also be labeled `agent:needs-breakdo
 
 ## Status Rules
 
-Only one active agent should claim a task.
+Only one active agent should claim a GitHub Issue or allowed local task.
+
+For normal work, use GitHub labels, issue body, issue comments, linked sub-issues, PRs, and PR comments as the authoritative status record. Do not create or update a local task file unless the work falls under an allowed `multiagent/tasks/` exception.
 
 Every status transition must append a new work log entry in `multiagent/logs/<YYYY-MM>.md`. Do not update or replace an earlier log entry for the same issue or task.
 
@@ -101,7 +105,7 @@ Do not move a task to `review` unless:
 
 - code is complete
 - tests/checks are recorded
-- done evidence is written
+- done evidence is written in the GitHub Issue or PR
 - linked execution sub-issues are done when the task has sub-issues
 - parent issue description has summaries of findings, fixes, and verification evidence
 - a new `review` work log entry has been appended

@@ -33,7 +33,7 @@ Human approval is required before changing:
 
 ## Required For Security-Sensitive Tasks
 
-Record in the task file:
+Record in the GitHub Issue or PR. Use a local task file only for allowed `multiagent/tasks/` exceptions:
 
 - threat or risk considered
 - changed behavior

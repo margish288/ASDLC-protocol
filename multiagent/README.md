@@ -2,7 +2,9 @@
 
 This directory contains the reusable repo-local operating system for agents.
 
-When this protocol is installed into a target repository, GitHub Issues are the backlog and files in this directory become durable working memory.
+When this protocol is installed into a target repository, GitHub Issues are the backlog and authoritative work record. GitHub labels, issue bodies, issue comments, linked sub-issues, PRs, and PR comments are the source of truth.
+
+Files in this directory provide reusable policies, templates, logs, and optional local notes. They support the GitHub record; they do not replace it.
 
 In this protocol-template repository, keep only reusable instructions, policies, templates, and clearly marked examples. Do not create live task files, live monthly work logs, or handoff records here.
 
@@ -17,7 +19,7 @@ For the agent-perspective read order, use `docs/agentic-workflow.md`.
 ```text
 multiagent/
   protocol.md              Process agents must follow
-  tasks/                   Target repo task README and task-file templates
+  tasks/                   Exception-only local task guidance and templates
   logs/                    Target repo log README and monthly log template
   handoffs/                Target repo handoff guidance
   policies/                Permissions, restrictions, and safety rules
@@ -44,10 +46,11 @@ Research must be written into the source issue or task before creating implement
 
 No important agent context should live only in chat.
 
-When working in a target repository, if an agent discovers something important, it must be written into:
+When working in a target repository, if an agent discovers something important, it must be written into GitHub first:
 
-- the task file
-- a handoff file
-- docs
-- an ADR
-- or a new append-only work log entry
+- the GitHub Issue body or comments
+- linked GitHub sub-issues
+- the PR description or comments
+- docs or an ADR when the information is durable project knowledge
+- a local task or handoff file only for allowed exceptions
+- a new append-only work log entry when the target repository uses work logs

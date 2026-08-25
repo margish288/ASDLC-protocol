@@ -10,7 +10,7 @@ Implementation issue: a separate issue created from an oversized source issue. I
 
 Execution sub-issue: a linked sub-issue created under a ready implementation issue after research, used to track separable implementation steps.
 
-Parent issue description: the GitHub Issue body or repo-local task file that must contain research summaries, linked work, progress, findings, fixes, blockers, and remaining work. When GitHub permissions allow, update the issue body directly rather than relying only on comments.
+Parent issue description: the GitHub Issue body that must contain research summaries, linked work, progress, findings, fixes, blockers, and remaining work. A repo-local task file may stand in only for allowed `multiagent/tasks/` exceptions. When GitHub permissions allow, update the issue body directly rather than relying only on comments.
 
 ## Research First
 
@@ -21,7 +21,7 @@ Before deciding whether to split, create sub-issues, or code, agents must resear
 - inspect affected source files, tests, and configuration
 - identify dependencies, risks, unknowns, and likely verification
 - estimate issue points
-- write a concise research summary in the parent issue description or repo-local task file
+- write a concise research summary in the parent GitHub Issue description
 
 ## Issue Points
 

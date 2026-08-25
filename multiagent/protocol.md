@@ -2,12 +2,24 @@
 
 ## Work Sources
 
-Agents may work from:
+GitHub Issues are the primary source of truth.
 
-1. GitHub Issues labeled `agent:ready`
-2. Repo-local tasks in `multiagent/tasks/` with `status: ready`
+Agents must work from GitHub Issues labeled `agent:ready` by default. Use `gh issue list`, `gh issue view`, `gh issue edit`, `gh issue comment`, and related `gh pr` commands when GitHub access is available.
 
-GitHub Issues are preferred for team-visible work.
+GitHub labels, issue body, issue comments, linked sub-issues, PRs, and PR comments are authoritative.
+
+Agents must not create local task files for every GitHub Issue by default.
+
+If GitHub cannot be reached or the agent cannot update issue bodies, labels, comments, PRs, or linked sub-issues, do not silently substitute local task files. Ask for access, mark the GitHub Issue blocked when possible, or use a local task file only when the work matches an allowed exception.
+
+Use `multiagent/tasks/` only for:
+
+- repo-only tasks without GitHub Issues
+- temporary local planning
+- explicit human request
+- complex handoff that needs repo-local durable notes
+
+Local task files are supplemental notes only. They must not replace or override GitHub Issues, labels, comments, PRs, or linked sub-issues.
 
 New GitHub Issues may start with `agent:needs-triage`. Agents must research and triage unclear or large requirements before implementation.
 
@@ -24,16 +36,16 @@ Within the same priority, pick the lowest sequence number or oldest ready issue.
 
 ## Requirement Research And Triage
 
-Before claiming implementation work, agents must research and classify the issue or repo-local task.
+Before claiming implementation work, agents must research and classify the GitHub Issue. Use a repo-local task only for an allowed `multiagent/tasks/` exception.
 
 Research checklist:
 
-- read the issue or task description and comments
+- read the GitHub Issue body and comments
 - read relevant repo docs and policy files
 - inspect affected source files, tests, and configuration
 - identify dependencies, risks, and unknowns
 - estimate issue points
-- write a concise research summary to the parent issue description or repo-local task file
+- write a concise research summary to the parent GitHub Issue description
 
 Readiness checklist:
 
@@ -98,7 +110,9 @@ agent:needs-triage -> agent:ready -> agent:in-progress -> agent:review -> agent:
          +-> agent:needs-breakdown -> implementation issues -> agent:split
 ```
 
-## Local Task Status Flow
+## Local Task Exception Flow
+
+Local tasks are exception-only. Use this flow only for repo-only tasks without GitHub Issues, temporary local planning, explicit human request, or complex handoff notes that need repo-local durability.
 
 ```text
 backlog -> ready -> in_progress -> review -> done
@@ -109,14 +123,14 @@ backlog -> ready -> in_progress -> review -> done
 
 ## Claiming A Task
 
-Only claim tasks classified as `agent:ready` or repo-local tasks with `status: ready`.
+Only claim GitHub Issues classified as `agent:ready`. Use a repo-local task with `status: ready` only for an allowed `multiagent/tasks/` exception.
 
 When claiming GitHub Issue `#123`:
 
 1. Move label from `agent:ready` to `agent:in-progress`.
 2. Comment with agent name and branch.
 3. Create branch.
-4. Create or update local task file.
+4. Update the issue body or comments with claim context.
 
 Branch format must be one of:
 
@@ -129,21 +143,9 @@ hotfix/123
 
 Choose the prefix that matches the work type. Use the GitHub Issue number for the numeric suffix. For repo-only work without a GitHub Issue, use the local task number in the same position.
 
-Task file format:
-
-```text
-multiagent/tasks/GH-123-short-title.md
-```
-
-For repo-only work, use:
-
-```text
-multiagent/tasks/TASK-000-short-title.md
-```
-
 ## Working The Task
 
-During implementation, update the task file when you discover:
+During implementation, update the GitHub Issue or PR when you discover:
 
 - relevant files
 - root cause
@@ -152,29 +154,30 @@ During implementation, update the task file when you discover:
 - changed scope
 - test findings
 
-Also update GitHub Issue descriptions when permissions allow:
+Keep GitHub relationships and descriptions current:
 
 - parent issue description lists linked implementation issues or execution sub-issues and current status in the issue body, not only comments
 - execution sub-issue descriptions include research findings, fixes, changed files, and verification evidence
 - parent issue description receives a concise summary after each linked issue or sub-issue is completed
 
+Update a local task file only when the work falls under an allowed `multiagent/tasks/` exception.
+
 ## Completing The Task
 
 Before moving to `review`, update:
 
-- task status
-- done evidence
+- GitHub Issue status labels
+- done evidence in the GitHub Issue or PR
 - changed files
 - test results
 - new append-only work log entry
-- GitHub Issue labels
 - PR link, if available
 
 Do not move a parent issue to `agent:done` until every linked implementation issue and execution sub-issue is done.
 
 ## Work Logs
 
-Work logs in `multiagent/logs/` are append-only.
+Work logs in `multiagent/logs/` are append-only supplemental audit history. They do not replace GitHub as the source of truth.
 
 Agents must add a new log line whenever they record a meaningful event or status transition for an issue or task. This includes `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues, and `ready`, `in_progress`, `review`, and `done` for repo-local tasks.
 
@@ -186,11 +189,11 @@ If later information becomes available, such as a PR number, merge commit, block
 
 If blocked:
 
-1. Set local task status to `blocked`.
-2. Add blocker details.
-3. Create handoff file.
-4. Move GitHub label to `agent:blocked`, if using GitHub.
-5. Comment on the issue with the blocker summary, if using GitHub.
+1. Move GitHub label to `agent:blocked`.
+2. Update the issue body or comment with blocker details.
+3. Add blocker context to the PR when one exists.
+4. Create a repo-local handoff file only for complex handoffs that need durable notes beyond GitHub or when explicitly requested.
+5. If using an allowed local task file, set its status to `blocked`.
 
 ## Stopping Mid-Task
 

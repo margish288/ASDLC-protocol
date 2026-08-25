@@ -29,7 +29,7 @@
 
 ## Required Evidence
 
-Agents must record test evidence in the active task file.
+Agents must record test evidence in the GitHub Issue or PR. Record it in a local task file only when the work falls under an allowed `multiagent/tasks/` exception.
 
 At minimum, include:
 

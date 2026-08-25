@@ -35,6 +35,6 @@ Examples:
 
 ## Done Evidence
 
-A task cannot move to `review` without test evidence.
+A GitHub Issue or allowed local task cannot move to `review` without test evidence.
 
 If tests cannot be run, explain why and mark residual risk.
