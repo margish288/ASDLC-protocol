@@ -98,7 +98,7 @@ Default flow:
 4. Classify the requirement using `multiagent/protocol.md`.
 5. Ask questions, mark blocked, or split the issue when it is not ready.
 6. Claim only a ready task estimated at 8 issue points or less.
-7. Create a task branch.
+7. Create an approved work branch.
 8. Implement only the scoped work.
 9. Run relevant checks.
 10. Update task file with evidence.
@@ -108,17 +108,28 @@ Default flow:
 
 ## Branch Naming
 
-Use:
+Branch names must use exactly one of these formats:
 
 ```text
-agent/GH-<issue-number>-<short-title>
+feature/<issue-number>
+bugfix/<issue-number>
+research/<issue-number>
+hotfix/<issue-number>
 ```
 
-For repo-only tasks:
+Use the GitHub Issue number for `<issue-number>`. For repo-local tasks without a GitHub Issue, use the local task number in the same position.
+
+## Parent Branch Protection
+
+Agents must never commit directly to parent branches and must never push directly to parent branches. Parent branches include `main`, `master`, `dev`, `develop`, `staging`, `qa`, release branches, and any other shared integration, release, environment, or deployment branch regardless of name.
+
+All changes must start on an approved `feature`, `bugfix`, `research`, or `hotfix` branch and move through pull requests only. The default promotion flow is:
 
 ```text
-agent/TASK-<task-number>-<short-title>
+feature|bugfix|research|hotfix branch -> dev -> staging/qa -> main/master
 ```
+
+If this repository uses different parent branch names, the same rule applies: approved work branches feed parent branches only by PR, and parent-to-parent promotion also happens only by PR.
 
 ## Required Before Editing
 
@@ -147,6 +158,7 @@ A task may only be marked `done` or `review` when:
 
 Agents must not:
 
+- commit or push directly to parent branches such as `main`, `master`, `dev`, `develop`, `staging`, or `qa`
 - commit secrets, tokens, `.env` files, private keys, or credentials
 - rewrite git history unless explicitly instructed
 - delete user work

@@ -98,11 +98,16 @@ When claiming GitHub Issue `#123`:
 3. Create branch.
 4. Create or update local task file.
 
-Branch format:
+Branch format must be one of:
 
 ```text
-agent/GH-123-short-title
+feature/123
+bugfix/123
+research/123
+hotfix/123
 ```
+
+Choose the prefix that matches the work type. Use the GitHub Issue number for the numeric suffix. For repo-only work without a GitHub Issue, use the local task number in the same position.
 
 Task file format:
 
