@@ -1,5 +1,13 @@
 # Agentic Development Protocol
 
+## Protocol Root
+
+In a local-only target repository install, the protocol root is `.agent-protocol/`.
+
+In a tracked install or in this protocol-template source repository, the protocol root is the repository root.
+
+Resolve protocol paths such as `multiagent/tasks/`, `multiagent/logs/`, and `docs/agentic-workflow.md` relative to the protocol root. GitHub Issues, PRs, source files, tests, package files, and product docs are target repository resources.
+
 ## Work Sources
 
 GitHub Issues are the primary source of truth.
@@ -12,7 +20,7 @@ Agents must not create local task files for every GitHub Issue by default.
 
 If GitHub cannot be reached or the agent cannot update issue bodies, labels, comments, PRs, or linked sub-issues, do not silently substitute local task files. Ask for access, mark the GitHub Issue blocked when possible, or use a local task file only when the work matches an allowed exception.
 
-Use `multiagent/tasks/` only for:
+Use `<protocol-root>/multiagent/tasks/` only for:
 
 - repo-only tasks without GitHub Issues
 - temporary local planning
@@ -177,7 +185,7 @@ Do not move a parent issue to `agent:done` until every linked implementation iss
 
 ## Work Logs
 
-Work logs in `multiagent/logs/` are repo-level monthly files. Use `multiagent/logs/<YYYY-MM>.md` for the calendar month in which the status event happened. Work logs are append-only supplemental audit history and do not replace GitHub as the source of truth.
+Work logs under `<protocol-root>/multiagent/logs/` are repo-level monthly files. Use `<protocol-root>/multiagent/logs/<YYYY-MM>.md` for the calendar month in which the status event happened. Work logs are append-only supplemental audit history and do not replace GitHub as the source of truth.
 
 Agents must add a new log line whenever they record a meaningful issue/task status event. This includes `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues, and `ready`, `in_progress`, `review`, and `done` for repo-local tasks. Do not log routine progress chatter that does not change or document issue/task status.
 
@@ -185,9 +193,11 @@ Agents must never edit, replace, collapse, delete, or rewrite an earlier log ent
 
 If later information becomes available, such as a PR number, merge commit, blocker resolution, or done status, append another line with that information instead of editing the earlier line.
 
-When a status event happens during branch work, append the log entry before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
+In local-only installs, work logs are ignored local protocol files. Append local status-event entries, but do not commit or push them. GitHub Issue labels, issue body updates, comments, PRs, and PR comments are the shared status record.
 
-If a `done` status is only known after merge, update the GitHub Issue or PR immediately. Add the tracked monthly log entry in the merge/status-maintenance path used by the repository, not as an extra per-feature follow-up commit after the agent already pushed completed work.
+In explicit tracked-log installs, when a status event happens during branch work, append the log entry before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
+
+If a `done` status is only known after merge, update the GitHub Issue or PR immediately. In explicit tracked-log installs, add the tracked monthly log entry in the merge/status-maintenance path used by the repository, not as an extra per-feature follow-up commit after the agent already pushed completed work.
 
 ## Blocking The Task
 
@@ -196,7 +206,7 @@ If blocked:
 1. Move GitHub label to `agent:blocked`.
 2. Update the issue body or comment with blocker details.
 3. Add blocker context to the PR when one exists.
-4. Create a repo-local handoff file only for complex handoffs that need durable notes beyond GitHub or when explicitly requested.
+4. Create a repo-local handoff file under `<protocol-root>/multiagent/handoffs/` only for complex handoffs that need durable notes beyond GitHub or when explicitly requested.
 5. If using an allowed local task file, set its status to `blocked`.
 
 ## Stopping Mid-Task

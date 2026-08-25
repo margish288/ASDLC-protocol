@@ -2,6 +2,8 @@
 
 GitHub Issues are the primary source of truth. Do not create one local task file per GitHub Issue by default.
 
+In local-only installs, this directory lives under `.agent-protocol/multiagent/tasks/` and is ignored. Local task files are private planning or handoff notes unless a human explicitly requests tracked task files.
+
 In this protocol-template repository, do not create live `GH-*` or `TASK-*` files. Keep this directory limited to reusable guidance and template references.
 
 In a target repository, use `multiagent/tasks/` only for:

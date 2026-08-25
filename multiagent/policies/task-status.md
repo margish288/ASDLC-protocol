@@ -99,9 +99,9 @@ Only one active agent should claim a GitHub Issue or allowed local task.
 
 For normal work, use GitHub labels, issue body, issue comments, linked sub-issues, PRs, and PR comments as the authoritative status record. Do not create or update a local task file unless the work falls under an allowed `multiagent/tasks/` exception.
 
-Every status transition must append a new work log entry in the current repo-level monthly log at `multiagent/logs/<YYYY-MM>.md`. Do not update or replace an earlier log entry for the same issue or task.
+Every status transition must append a new work log entry in the current repo-level monthly log at `<protocol-root>/multiagent/logs/<YYYY-MM>.md`. Do not update or replace an earlier log entry for the same issue or task.
 
-When a status transition happens during branch work, the log entry must be added before committing and included in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status transition.
+For local-only installs, monthly work logs stay ignored under `.agent-protocol/` and must not be committed or pushed. For explicit tracked-log installs, when a status transition happens during branch work, the log entry must be added before committing and included in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status transition.
 
 Do not move a task to `review` unless:
 

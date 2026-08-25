@@ -22,7 +22,7 @@ Agents may do these without approval when scoped to the active task:
 
 Green actions do not include editing, replacing, collapsing, deleting, or rewriting previous work log entries.
 
-Green actions do not include pushing completed work and then creating a separate log-only follow-up commit for the matching status event. When the status event happens during branch work, the log entry must be included with the same work commit/PR.
+For local-only installs, monthly work logs stay ignored under `.agent-protocol/` and must not be committed or pushed. For explicit tracked-log installs, green actions do not include pushing completed work and then creating a separate log-only follow-up commit for the matching status event. When the status event happens during branch work, the log entry must be included with the same work commit/PR.
 
 Green actions do not include committing or pushing directly to parent branches. Parent branch changes must follow `multiagent/policies/git.md` and go through pull requests only.
 

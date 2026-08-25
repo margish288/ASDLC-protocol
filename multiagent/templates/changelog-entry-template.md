@@ -1,6 +1,6 @@
 Append one new line to the current monthly log for each meaningful issue/task status event. Never edit a previous line for the same issue or task. If later details become available, append another line.
 
-When the status event happens during branch work, add this line before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
+In local-only installs, this entry stays in the ignored `.agent-protocol/` copy and must not be committed or pushed. In explicit tracked-log installs, when the status event happens during branch work, add this line before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
 
 ```text
 YYYY-MM-DD | GH-000 | status | one-line summary | agent-name | branch-or-pr

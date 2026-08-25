@@ -2,15 +2,18 @@
 
 This file is the agent-perspective map for where to go, what to read, and when to read it.
 
+If this protocol is installed locally in a target repository, read protocol files from `.agent-protocol/`. Treat references such as `docs/...` and `multiagent/...` as protocol-relative unless the text explicitly says target repository path.
+
 ## Agent Reading Workflow
 
 ### 1. Entering The Repo
 
 Read first:
 
-1. `AGENTS.md`
-2. `docs/agentic-workflow.md`
-3. `docs/project-overview.md`
+1. root `AGENTS.md` bootstrap when present
+2. `.agent-protocol/AGENTS.md` in a local-only install, or `AGENTS.md` in a tracked/source install
+3. `docs/agentic-workflow.md`
+4. `docs/project-overview.md`
 
 Use this step to understand the repository purpose, the agent operating rules, and the high-level project.
 
@@ -29,7 +32,7 @@ Use this step to understand GitHub labels, optional local task statuses, priorit
 Read:
 
 1. The GitHub Issue body and comments
-2. `.github/ISSUE_TEMPLATE/agent_task.yml` or `.github/ISSUE_TEMPLATE/requirements_epic.yml`
+2. `.github/ISSUE_TEMPLATE/agent_task.yml` or `.github/ISSUE_TEMPLATE/requirements_epic.yml` when tracked issue templates exist
 3. `multiagent/protocol.md`
 4. `multiagent/policies/decomposition.md`
 5. `multiagent/templates/requirements-breakdown-template.md`
@@ -96,11 +99,11 @@ Read:
 4. `multiagent/templates/changelog-entry-template.md`
 5. `multiagent/logs/README.md`
 
-Use this step to record changed files, commands run, test results, behavior verified, known limitations, and a new append-only status-event work log entry in the current monthly log.
+Use this step to record changed files, commands run, test results, behavior verified, known limitations, and a new append-only status-event work log entry in the current monthly log when work logs are enabled.
 
 Work logs must preserve every meaningful issue/task status event as a separate chronological line. Never rewrite an earlier log entry for the same issue or task.
 
-When the status event happens during branch work, add the log entry before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
+In local-only installs, work logs live under `.agent-protocol/` and stay ignored. In explicit tracked-log installs, when the status event happens during branch work, add the log entry before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
 
 ## GitHub Issue Triage
 
@@ -158,6 +161,8 @@ Each implementation issue or execution sub-issue should include:
 Use `multiagent/policies/decomposition.md` for split rules and `multiagent/templates/requirements-breakdown-template.md` for recording a proposed breakdown.
 
 ## Issue Forms
+
+Tracked GitHub issue form files are optional. Create them only when a human explicitly wants issue templates committed to the target repository.
 
 - `.github/ISSUE_TEMPLATE/agent_task.yml` is for implementation-ready tasks intended to fit one PR.
 - `.github/ISSUE_TEMPLATE/requirements_epic.yml` is for larger requirements that need triage and possible decomposition.

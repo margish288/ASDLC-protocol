@@ -4,6 +4,8 @@
 
 This repository provides a reusable agentic development protocol. It is a template made of Markdown instructions, policies, and sample file formats that agents should follow after the protocol is installed into a target repository.
 
+The default target installation is local-only. Agents copy or sync the protocol into `.agent-protocol/`, ignore it through `.git/info/exclude`, and use GitHub Issues and PRs as the shared work record. Tracked installation is opt-in only.
+
 This repository is not itself a target product repository. Do not create live agent task files, monthly work logs, handoffs, or issue records here. Keep only reusable instructions, policies, templates, and clearly marked examples.
 
 ## Primary Users
@@ -24,6 +26,7 @@ This repository does not aim to:
 - Host live work records for changes made to this protocol template.
 - Contain product-specific code, runtime configuration, deployments, or application tests.
 - Replace target repository customization after installation.
+- Force target repositories to commit protocol Markdown files by default.
 
 ## Important External Systems
 
@@ -38,3 +41,4 @@ This repository does not aim to:
 - Keep instructions reusable and target-repository agnostic.
 - Keep examples clearly marked as examples or templates.
 - Avoid committing live task/log artifacts from protocol-template maintenance.
+- Keep local-only installation instructions clear so target repositories are not cluttered with protocol files.

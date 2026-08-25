@@ -2,6 +2,8 @@
 
 This directory contains the reusable repo-local operating system for agents.
 
+In the default local-only install, this directory lives at `.agent-protocol/multiagent/` and is ignored by `.git/info/exclude`. In a tracked install, it may live at `multiagent/` and be committed only when a human explicitly requests that.
+
 When this protocol is installed into a target repository, GitHub Issues are the backlog and authoritative work record. GitHub labels, issue bodies, issue comments, linked sub-issues, PRs, and PR comments are the source of truth.
 
 Files in this directory provide reusable policies, templates, logs, and optional local notes. They support the GitHub record; they do not replace it.
@@ -12,7 +14,7 @@ GitHub Issues may start as `agent:needs-triage`. Agents should research, classif
 
 This workflow estimates work with issue points: 1 issue point = 1 hour of expected implementation, verification, and documentation work. Issues over 8 issue points should be split into separate implementation issues before coding, not into execution sub-issues.
 
-For the agent-perspective read order, use `docs/agentic-workflow.md`.
+For the agent-perspective read order, use `<protocol-root>/docs/agentic-workflow.md`.
 
 ## Directory Map
 
@@ -38,7 +40,7 @@ Before coding, classify each issue as:
 - `agent:blocked`
 - `agent:split`
 
-If an issue contains separable work or is over 8 issue points, use `multiagent/policies/decomposition.md` and `multiagent/templates/requirements-breakdown-template.md` to propose implementation issues or execution sub-issues with acceptance criteria, dependencies, labels, issue point estimates, verification expectations, and sequence.
+If an issue contains separable work or is over 8 issue points, use `<protocol-root>/multiagent/policies/decomposition.md` and `<protocol-root>/multiagent/templates/requirements-breakdown-template.md` to propose implementation issues or execution sub-issues with acceptance criteria, dependencies, labels, issue point estimates, verification expectations, and sequence.
 
 Research must be written into the source issue or task before creating implementation issues or execution sub-issues. Parent issues must list linked work and summaries, and they may only be marked done after all linked implementation issues and sub-issues are done.
 
@@ -54,3 +56,5 @@ When working in a target repository, if an agent discovers something important, 
 - docs or an ADR when the information is durable project knowledge
 - a local task or handoff file only for allowed exceptions
 - a new append-only monthly work log entry when the target repository uses work logs
+
+For local-only installs, work logs are local and ignored. Shared status must be recorded in GitHub Issues and PRs.

@@ -1,23 +1,48 @@
 # Agent Protocol Template Instructions
 
-This repository is the agentic development protocol template. It defines reusable rules, policies, and file templates that agents copy into or follow inside a target repository.
+This repository is the agentic development protocol template. It defines reusable rules, policies, and file templates that agents install locally or explicitly track inside a target repository.
 
 Do not treat this repository itself as a target product repository. When editing this protocol template, do not create live task files in `multiagent/tasks/`, live monthly work logs in `multiagent/logs/`, handoffs, or other runtime work records. Those files are created only inside a target repository that has installed this protocol.
+
+## Target Repository Install Modes
+
+Default install mode is local-only.
+
+For local-only installs:
+
+- copy or sync this protocol under `.agent-protocol/` in the target repository
+- create a root `AGENTS.md` bootstrap only when the target repository does not already track `AGENTS.md`
+- add `/.agent-protocol/` and any local bootstrap files to `.git/info/exclude`
+- do not modify tracked `.gitignore` unless a human explicitly requests a tracked ignore rule
+- do not commit or push `.agent-protocol/`, local bootstrap files, local task notes, local handoffs, or local work logs
+
+If the target repository already has a tracked `AGENTS.md`, do not overwrite it for local-only setup. The human must either give the agent a global/tool instruction to read `.agent-protocol/AGENTS.md` or explicitly approve a tracked bootstrap change.
+
+Tracked protocol installation is opt-in only. Use it only when a human explicitly wants protocol files, issue templates, logs, or other workflow documents committed to the target repository.
+
+## Protocol Root
+
+In this protocol-template repository, the protocol root is the repository root.
+
+In a target repository local-only install, the protocol root is `.agent-protocol/`.
+
+Resolve protocol paths such as `docs/agentic-workflow.md`, `multiagent/protocol.md`, and `multiagent/logs/YYYY-MM.md` relative to the protocol root. Target product paths are called out separately as target repository paths.
 
 ## First Read Order
 
 Before making changes, read these files:
 
-1. `AGENTS.md`
-2. `docs/agentic-workflow.md`
-3. `docs/project-overview.md`
-4. `docs/setup.md`
-5. `docs/testing.md`
-6. `docs/conventions.md`
-7. `multiagent/protocol.md`
-8. `multiagent/policies/permissions.md`
-9. `multiagent/policies/decomposition.md` when triaging or splitting requirements
-10. Relevant GitHub Issue via `gh issue view`; read a local task file only when one exists for an approved exception case
+1. root `AGENTS.md` bootstrap when present
+2. `<protocol-root>/AGENTS.md`
+3. `<protocol-root>/docs/agentic-workflow.md`
+4. `<protocol-root>/docs/project-overview.md`
+5. `<protocol-root>/docs/setup.md`
+6. `<protocol-root>/docs/testing.md`
+7. `<protocol-root>/docs/conventions.md`
+8. `<protocol-root>/multiagent/protocol.md`
+9. `<protocol-root>/multiagent/policies/permissions.md`
+10. `<protocol-root>/multiagent/policies/decomposition.md` when triaging or splitting requirements
+11. Relevant GitHub Issue via `gh issue view`; read a local task file only when one exists for an approved exception case
 
 ## Template Summary
 
@@ -34,6 +59,7 @@ Primary contents:
 - Templates: `multiagent/templates/`
 - Target repo task examples: `multiagent/tasks/README.md`
 - Target repo log examples: `multiagent/logs/README.md` and `multiagent/logs/YYYY-MM.md`
+- Local-only install target: `.agent-protocol/`
 
 ## Project Setup Notes
 
@@ -53,7 +79,7 @@ Agents should use `gh` commands to fetch, inspect, claim, update, comment on, an
 
 If GitHub cannot be reached or the agent cannot update issue bodies, labels, comments, PRs, or linked sub-issues, do not silently substitute local task files. Ask for access, mark the GitHub Issue blocked when possible, or use a local task file only when the work matches an allowed exception.
 
-Use `multiagent/tasks/` only for:
+Use `<protocol-root>/multiagent/tasks/` only for:
 
 - repo-only tasks without GitHub Issues
 - temporary local planning
@@ -125,7 +151,7 @@ Default flow:
 10. Create an approved work branch.
 11. Implement only the scoped sub-issue or implementation issue.
 12. Run relevant checks.
-13. Update GitHub Issue descriptions/comments, PRs, and linked sub-issues, then append the status-event work log entry to the current monthly log before committing the work if the target repository uses work logs.
+13. Update GitHub Issue descriptions/comments, PRs, and linked sub-issues, then follow the work log policy for the repository install mode.
 14. Open PR or leave handoff.
 15. Move GitHub Issue status forward only when linked implementation issues or execution sub-issues are complete.
 
@@ -175,17 +201,19 @@ An issue or allowed local task may only be marked `done` or `review` when:
 - done evidence is written in the GitHub Issue or PR
 - parent issue and sub-issue descriptions include findings, fixes, and verification evidence
 - all linked implementation issues and execution sub-issues are done before the parent is marked done
-- a new append-only status-event entry is added to `multiagent/logs/<YYYY-MM>.md` and included in the same work commit/PR
+- the work log policy is followed for the repository install mode
 - GitHub Issue status is updated
 - PR is opened if code changed
 
 ## Work Log Rules
 
-Work logs are repo-level monthly files in `multiagent/logs/<YYYY-MM>.md`. They are append-only supplemental audit history and do not replace GitHub as the source of truth. Agents must add a new log line for every meaningful issue/task status event, including `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues or `ready`, `in_progress`, `review`, and `done` for repo-local tasks. Do not log routine progress chatter that does not change or document issue/task status.
+Work logs are repo-level monthly files under `<protocol-root>/multiagent/logs/<YYYY-MM>.md`. They are append-only supplemental audit history and do not replace GitHub as the source of truth. Agents must add a new log line for every meaningful issue/task status event, including `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues or `ready`, `in_progress`, `review`, and `done` for repo-local tasks. Do not log routine progress chatter that does not change or document issue/task status.
 
 Agents must never edit, replace, collapse, delete, or rewrite previous log entries for the same issue or task. Multiple log lines for the same issue or task are expected and required because they preserve the chronological history of the work.
 
-When a status event happens during work on a branch, the log entry must be added before the related commit and included in the same commit/PR as the work or status change. Agents must not push code and then create a separate follow-up commit only to add the matching work log entry.
+For default local-only installs, work logs are ignored local files under `.agent-protocol/`. Append local status-event entries, but do not commit or push them. GitHub Issue labels, issue body updates, comments, PRs, and PR comments remain the shared record between agents.
+
+For explicit tracked-log installs, when a status event happens during work on a branch, the log entry must be added before the related commit and included in the same commit/PR as the work or status change. Agents must not push code and then create a separate follow-up commit only to add the matching work log entry.
 
 ## Forbidden Actions
 
@@ -218,7 +246,7 @@ Ask for human approval before:
 
 ## Handoff Requirement
 
-If work is incomplete, update the GitHub Issue and PR with handoff context. Create a repo-local handoff in `multiagent/handoffs/` only for complex handoffs that need durable notes beyond GitHub or when explicitly requested.
+If work is incomplete, update the GitHub Issue and PR with handoff context. Create a repo-local handoff in `<protocol-root>/multiagent/handoffs/` only for complex handoffs that need durable notes beyond GitHub or when explicitly requested.
 
 The handoff must include:
 
