@@ -4,9 +4,9 @@ This directory contains the repo-local operating system for agents.
 
 GitHub Issues are the backlog. Files in this directory are the durable working memory.
 
-GitHub Issues may start as `agent:needs-triage`. Agents should classify and, when needed, decompose requirements before implementation.
+GitHub Issues may start as `agent:needs-triage`. Agents should research, classify, and, when needed, decompose requirements before implementation.
 
-This workflow estimates work with issue points: 1 issue point = 1 hour of expected implementation, verification, and documentation work. Issues over 8 issue points should be split before coding.
+This workflow estimates work with issue points: 1 issue point = 1 hour of expected implementation, verification, and documentation work. Issues over 8 issue points should be split into separate implementation issues before coding, not into execution sub-issues.
 
 For the agent-perspective read order, use `docs/agentic-workflow.md`.
 
@@ -34,7 +34,9 @@ Before coding, classify each issue as:
 - `agent:blocked`
 - `agent:split`
 
-If an issue contains separable work or is over 8 issue points, use `multiagent/policies/decomposition.md` and `multiagent/templates/requirements-breakdown-template.md` to propose child issues with acceptance criteria, dependencies, labels, issue point estimates, verification expectations, and sequence.
+If an issue contains separable work or is over 8 issue points, use `multiagent/policies/decomposition.md` and `multiagent/templates/requirements-breakdown-template.md` to propose implementation issues or execution sub-issues with acceptance criteria, dependencies, labels, issue point estimates, verification expectations, and sequence.
+
+Research must be written into the source issue or task before creating implementation issues or execution sub-issues. Parent issues must list linked work and summaries, and they may only be marked done after all linked implementation issues and sub-issues are done.
 
 ## Core Principle
 

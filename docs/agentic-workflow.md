@@ -36,6 +36,8 @@ Read:
 
 Use this step to classify the issue as `agent:ready`, `agent:needs-clarification`, `agent:needs-breakdown`, `agent:blocked`, or `agent:split`.
 
+Research before creating issues, creating sub-issues, or coding. Record the research summary in the source issue description or repo-local task file.
+
 Do not code during triage.
 
 ### 4. Before Claiming Implementation
@@ -49,9 +51,9 @@ Read:
 5. `multiagent/policies/permissions.md`
 6. Any relevant policy files in `multiagent/policies/`
 
-Use this step to confirm the goal, acceptance criteria, affected area, issue points, verification expectation, dependencies, and approval requirements.
+Use this step to confirm the goal, acceptance criteria, affected area, issue points, verification expectation, dependencies, approval requirements, and linked sub-issue plan.
 
-Only claim work labeled `agent:ready` or a local task with `status: ready`.
+Only claim implementation work labeled `agent:ready` or a local task with `status: ready`. The claimed issue must be estimated at 8 issue points or less.
 
 ### 5. Before Editing Code
 
@@ -70,6 +72,12 @@ Use this step to understand local patterns before making changes.
 ### 6. While Working
 
 Keep the active task file in `multiagent/tasks/` updated with discoveries, scope changes, changed files, and test findings.
+
+Keep GitHub Issue descriptions updated when permissions allow:
+
+- parent issues list linked implementation issues or execution sub-issues, status, summaries, blockers, and remaining work in the issue body, not only comments
+- sub-issues record research findings, implementation or fix notes, changed files, and verification evidence
+- parent issues are moved to done only after all linked implementation issues and execution sub-issues are done
 
 When work becomes blocked or risky, read:
 
@@ -100,9 +108,9 @@ This repo estimates implementation work with issue points:
 1 issue point = 1 hour of expected implementation, verification, and documentation work
 ```
 
-Issues over 8 issue points should be split into smaller issues before coding.
+Issues over 8 issue points should be split into separate implementation issues before coding. Do not use execution sub-issues as the split mechanism for an oversized source issue.
 
-Before implementation, a triage agent checks whether the issue has:
+Before implementation, a triage agent researches the issue and checks whether the issue has:
 
 - clear goal
 - clear acceptance criteria
@@ -116,8 +124,8 @@ Before implementation, a triage agent checks whether the issue has:
 
 - `agent:needs-triage`: issue has not been classified yet.
 - `agent:needs-clarification`: issue needs human input before implementation.
-- `agent:needs-breakdown`: issue is over 8 issue points, too large, vague, or separable.
-- `agent:split`: parent issue has child issues and tracks overall progress.
+- `agent:needs-breakdown`: issue is over 8 issue points, too large, vague, or separable and must be decomposed before implementation.
+- `agent:split`: parent issue has linked implementation issues or execution sub-issues and tracks overall progress.
 - `agent:ready`: issue is clear, scoped, and ready for implementation.
 - `agent:in-progress`: implementation is claimed and active.
 - `agent:blocked`: issue cannot continue because of an external dependency or blocker.
@@ -128,12 +136,16 @@ Before implementation, a triage agent checks whether the issue has:
 
 Agents should split large requirements when independent deliverables can be reviewed and verified separately.
 
-Each child issue should include:
+Oversized requirements are split into separate implementation issues, not execution sub-issues. Each implementation issue is then researched and may create its own execution sub-issues when the implementation steps need separate tracking.
+
+Each implementation issue or execution sub-issue should include:
 
 - parent issue link
 - goal
 - acceptance criteria
 - dependencies
+- research findings
+- implementation or fix notes
 - expected verification
 - suggested labels
 - issue point estimate

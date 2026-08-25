@@ -38,11 +38,11 @@ Issue needs human input before implementation.
 
 `agent:needs-breakdown`
 
-Issue is too large, vague, over 8 issue points, or separable and should be decomposed.
+Issue is too large, vague, over 8 issue points, or separable and should be decomposed before implementation. Issues over 8 issue points must be split into separate implementation issues, not execution sub-issues.
 
 `agent:split`
 
-Parent issue has been decomposed into child issues and tracks overall progress.
+Parent issue has linked implementation issues or execution sub-issues and tracks overall progress.
 
 `agent:ready`
 
@@ -100,9 +100,12 @@ Do not move a task to `review` unless:
 - code is complete
 - tests/checks are recorded
 - done evidence is written
+- linked execution sub-issues are done when the task has sub-issues
+- parent issue description has summaries of findings, fixes, and verification evidence
 - PR exists when code changed
 
 Do not move a task to `done` unless:
 
 - PR is merged, or
 - human explicitly accepts completion
+- all linked implementation issues and execution sub-issues are done when the task is a parent issue

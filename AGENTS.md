@@ -55,7 +55,7 @@ Agents must work from either:
 
 ## Requirement Analysis Before Implementation
 
-Agents must classify issues before coding.
+Agents must research and classify issues before coding.
 
 Valid classifications:
 
@@ -70,18 +70,26 @@ Use issue points for estimation:
 1 issue point = 1 hour of expected implementation, verification, and documentation work
 ```
 
-Agents must not implement vague, oversized, or conflicting requirements. An issue estimated over 8 issue points is oversized and must be broken into smaller issues before implementation.
+Agents must not implement vague, oversized, or conflicting requirements. Research must happen before implementation, issue splitting, or sub-issue creation. Research includes reading the issue or task, relevant repo docs, affected code, tests, dependencies, and prior local task context when available.
 
-Agents may create sub-issues when the parent issue clearly contains separable work. Each sub-issue must have:
+After research, agents must record a concise research summary in the parent issue description or repo-local task file.
+
+An issue estimated over 8 issue points is oversized. Oversized issues must be divided into multiple separate implementation issues before implementation, not into execution sub-issues. Each implementation issue must be estimated at 8 issue points or less, linked from the parent issue, and worked independently.
+
+For a ready implementation issue estimated at 8 issue points or less, agents must create linked execution sub-issues when the work has separable steps that should be tracked independently. Sub-issues must be linked to the parent issue using the platform relationship when available and listed in the parent issue description. Each sub-issue must have:
 
 - parent issue link
 - clear goal
 - acceptance criteria
 - dependencies
+- research findings
+- implementation/fix notes
 - suggested labels
 - issue point estimate
 - verification expectations
 - sequence order
+
+Agents must keep the parent issue description updated with linked implementation issues or sub-issues, current status, summaries of findings and fixes, blockers, and remaining work. When GitHub permissions allow, update the issue description/body directly rather than relying only on comments. A parent issue may only be marked done after all linked implementation issues and execution sub-issues are done.
 
 Agents must ask for human input when:
 
@@ -95,30 +103,43 @@ Default flow:
 1. Pull latest code when network and repository permissions allow.
 2. Read required context files.
 3. Find the highest-priority issue or task that is ready for triage or implementation.
-4. Classify the requirement using `multiagent/protocol.md`.
-5. Ask questions, mark blocked, or split the issue when it is not ready.
-6. Claim only a ready task estimated at 8 issue points or less.
-7. Create a task branch.
-8. Implement only the scoped work.
-9. Run relevant checks.
-10. Update task file with evidence.
-11. Update one-line log.
-12. Open PR or leave handoff.
-13. Move task status forward.
+4. Research the issue or task and record findings in the parent issue description or task file.
+5. Classify the requirement using `multiagent/protocol.md`.
+6. Ask questions, mark blocked, or split the issue when it is not ready.
+7. If the issue is over 8 issue points, create separate linked implementation issues and keep the parent as the tracking issue.
+8. Claim only a ready implementation issue estimated at 8 issue points or less.
+9. Create linked execution sub-issues when research shows separable implementation steps.
+10. Create an approved work branch.
+11. Implement only the scoped sub-issue or implementation issue.
+12. Run relevant checks.
+13. Update issue descriptions, task file, and one-line log with evidence.
+14. Open PR or leave handoff.
+15. Move task status forward only when linked implementation issues or execution sub-issues are complete.
 
 ## Branch Naming
 
-Use:
+Branch names must use exactly one of these formats:
 
 ```text
-agent/GH-<issue-number>-<short-title>
+feature/<issue-number>
+bugfix/<issue-number>
+research/<issue-number>
+hotfix/<issue-number>
 ```
 
-For repo-only tasks:
+Use the GitHub Issue number for `<issue-number>`. For repo-local tasks without a GitHub Issue, use the local task number in the same position.
+
+## Parent Branch Protection
+
+Agents must never commit directly to parent branches and must never push directly to parent branches. Parent branches include `main`, `master`, `dev`, `develop`, `staging`, `qa`, release branches, and any other shared integration, release, environment, or deployment branch regardless of name.
+
+All changes must start on an approved `feature`, `bugfix`, `research`, or `hotfix` branch and move through pull requests only. The default promotion flow is:
 
 ```text
-agent/TASK-<task-number>-<short-title>
+feature|bugfix|research|hotfix branch -> dev -> staging/qa -> main/master
 ```
+
+If this repository uses different parent branch names, the same rule applies: approved work branches feed parent branches only by PR, and parent-to-parent promotion also happens only by PR.
 
 ## Required Before Editing
 
@@ -139,6 +160,8 @@ A task may only be marked `done` or `review` when:
 - relevant tests/checks were run
 - changed files are listed in the task file
 - done evidence is written
+- parent issue and sub-issue descriptions include findings, fixes, and verification evidence
+- all linked implementation issues and execution sub-issues are done before the parent is marked done
 - `multiagent/logs/<YYYY-MM>.md` is updated
 - GitHub Issue or task status is updated
 - PR is opened if code changed
@@ -147,6 +170,7 @@ A task may only be marked `done` or `review` when:
 
 Agents must not:
 
+- commit or push directly to parent branches such as `main`, `master`, `dev`, `develop`, `staging`, or `qa`
 - commit secrets, tokens, `.env` files, private keys, or credentials
 - rewrite git history unless explicitly instructed
 - delete user work
