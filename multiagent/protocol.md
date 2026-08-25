@@ -9,7 +9,7 @@ Agents may work from:
 
 GitHub Issues are preferred for team-visible work.
 
-New GitHub Issues may start with `agent:needs-triage`. Agents must triage unclear or large requirements before implementation.
+New GitHub Issues may start with `agent:needs-triage`. Agents must research and triage unclear or large requirements before implementation.
 
 ## Task Priority Order
 
@@ -22,9 +22,18 @@ Pick work in this order:
 
 Within the same priority, pick the lowest sequence number or oldest ready issue.
 
-## Requirement Triage
+## Requirement Research And Triage
 
-Before claiming implementation work, agents must classify the issue or repo-local task.
+Before claiming implementation work, agents must research and classify the issue or repo-local task.
+
+Research checklist:
+
+- read the issue or task description and comments
+- read relevant repo docs and policy files
+- inspect affected source files, tests, and configuration
+- identify dependencies, risks, and unknowns
+- estimate issue points
+- write a concise research summary to the parent issue description or repo-local task file
 
 Readiness checklist:
 
@@ -40,22 +49,33 @@ Triage outcomes:
 
 - `agent:ready`: requirement is clear, scoped, and implementable.
 - `agent:needs-clarification`: human input is needed before safe implementation.
-- `agent:needs-breakdown`: requirement is over 8 issue points, too large, or separable and should be decomposed.
+- `agent:needs-breakdown`: requirement is over 8 issue points, too large, or separable and should be decomposed before implementation.
 - `agent:blocked`: work cannot proceed because of an external dependency, access issue, or unresolved blocker.
-- `agent:split`: parent requirement has been decomposed into child issues.
+- `agent:split`: parent requirement has linked implementation issues or execution sub-issues and tracks overall progress.
+
+## Oversized Issues And Sub-Issues
+
+If research estimates a source issue at over 8 issue points, agents must split it into multiple separate implementation issues, not execution sub-issues. Each implementation issue must be estimated at 8 issue points or less, linked from the parent issue, and worked independently.
+
+For each ready implementation issue, agents must research the issue before coding. When the work contains separable execution steps, create linked execution sub-issues under that implementation issue, update the parent issue description with the sub-issue list and status, and work each sub-issue individually. Use the platform parent/sub-issue relationship when available so the parent issue visibly lists its sub-issues.
+
+Each execution sub-issue description must include parent issue link, goal, acceptance criteria, dependencies, research findings, implementation or fix notes, expected verification, labels, issue point estimate, and sequence order.
+
+Parent issue descriptions must stay current with linked implementation issues or sub-issues, research summaries, finding and fix summaries, blockers, and remaining work. When GitHub permissions allow, update the issue description/body directly rather than relying only on comments. A parent issue may only move to `agent:done` after all linked implementation issues and execution sub-issues are done.
 
 Full lifecycle:
 
 ```text
 Issue created
   -> agent:needs-triage
-  -> triage agent reviews
+  -> triage agent researches
   -> if unclear: agent:needs-clarification
   -> if over 8 issue points or too large: agent:needs-breakdown
-  -> create sub-issues
+  -> create separate implementation issues
   -> parent becomes agent:split
-  -> child issues become agent:ready
-  -> implementation agent claims ready issue
+  -> implementation issues become agent:ready
+  -> implementation agent researches ready issue
+  -> create execution sub-issues when needed
   -> agent:in-progress
   -> agent:review
   -> agent:done
@@ -63,7 +83,7 @@ Issue created
 
 Use issue points for estimation: 1 issue point = 1 hour of expected implementation, verification, and documentation work. Agents must not implement vague, oversized, conflicting, or risky requirements. Any issue estimated over 8 issue points must be split before implementation. Ask for human input when product behavior is ambiguous, acceptance criteria conflict, scope cannot be reduced safely, or security/payment/data behavior is unclear.
 
-Use `multiagent/policies/decomposition.md` when deciding whether to split work, and use `multiagent/templates/requirements-breakdown-template.md` to record the triage result.
+Use `multiagent/policies/decomposition.md` when deciding whether to split work or create execution sub-issues, and use `multiagent/templates/requirements-breakdown-template.md` to record the triage result.
 
 ## GitHub Issue Flow
 
@@ -75,7 +95,7 @@ agent:needs-triage -> agent:ready -> agent:in-progress -> agent:review -> agent:
          |
          +-> agent:needs-clarification
          |
-         +-> agent:needs-breakdown -> child issues -> agent:split
+         +-> agent:needs-breakdown -> implementation issues -> agent:split
 ```
 
 ## Local Task Status Flow
@@ -132,6 +152,12 @@ During implementation, update the task file when you discover:
 - changed scope
 - test findings
 
+Also update GitHub Issue descriptions when permissions allow:
+
+- parent issue description lists linked implementation issues or execution sub-issues and current status in the issue body, not only comments
+- execution sub-issue descriptions include research findings, fixes, changed files, and verification evidence
+- parent issue description receives a concise summary after each linked issue or sub-issue is completed
+
 ## Completing The Task
 
 Before moving to `review`, update:
@@ -143,6 +169,8 @@ Before moving to `review`, update:
 - one-line log
 - GitHub Issue labels
 - PR link, if available
+
+Do not move a parent issue to `agent:done` until every linked implementation issue and execution sub-issue is done.
 
 ## Blocking The Task
 

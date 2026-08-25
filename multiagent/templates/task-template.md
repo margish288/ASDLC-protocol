@@ -31,6 +31,27 @@ Describe the outcome this task should achieve.
 
 Relevant background, links, issue notes, or constraints.
 
+## Research Summary
+
+Record what was inspected before splitting, creating sub-issues, or coding.
+
+- Issue/task notes:
+- Relevant docs:
+- Relevant code/tests:
+- Dependencies:
+- Risks/unknowns:
+- Estimate:
+
+## Linked Work
+
+Use this section for parent issue tracking.
+
+- Implementation issues:
+- Execution sub-issues:
+- Parent/sub-issue platform links:
+- Current status:
+- Parent summary:
+
 ## Affected Areas
 
 - `path/to/file`
@@ -70,7 +91,7 @@ Reason:
 
 ## Implementation Notes
 
-Record discoveries and important choices while working.
+Record discoveries, findings, fixes, and important choices while working. Mirror important findings and fixes into the relevant issue or sub-issue description when permissions allow.
 
 ## Test Requirements
 
@@ -91,6 +112,8 @@ Fill before review/done:
 - Commands run:
 - Test results:
 - Behavior verified:
+- Parent/sub-issue descriptions updated:
+- Platform parent/sub-issue links updated:
 - Known limitations:
 
 ## Handoff Notes

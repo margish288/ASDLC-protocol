@@ -10,7 +10,8 @@ Agents may do these without approval when scoped to the active task:
 - update documentation
 - create approved `feature`, `bugfix`, `research`, or `hotfix` branches
 - classify issues for readiness
-- create GitHub sub-issues from a clear parent requirement
+- create separate implementation issues from a researched oversized parent requirement
+- create linked execution sub-issues from a researched ready implementation issue
 - update non-terminal GitHub triage labels
 - update task files
 - update one-line logs
