@@ -1,6 +1,8 @@
 # Work Log: YYYY-MM
 
-Append new entries only. Never edit, replace, collapse, delete, or rewrite earlier entries for the same issue or task. If later details become available, append another line.
+Append new status-event entries only. Never edit, replace, collapse, delete, or rewrite earlier entries for the same issue or task. If later details become available, append another line.
+
+When a status event happens during branch work, add the matching log line before committing and include this file in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
 
 Format:
 

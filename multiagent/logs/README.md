@@ -1,14 +1,16 @@
 # Work Logs
 
-In a target repository, keep one-line chronological task entries here. Work logs are append-only supplemental audit history. They do not replace GitHub as the source of truth.
+In a target repository, keep repo-level monthly work logs here. Work logs are append-only supplemental audit history. They do not replace GitHub as the source of truth.
 
 In this protocol-template repository, do not create real monthly work log files. Keep only this README and reusable monthly templates such as `YYYY-MM.md`.
 
-Agents must add a new line for every meaningful issue/task event and status transition. Do not update, replace, collapse, delete, or rewrite any previous log entry for the same issue or task.
+Agents must add a new line for every meaningful issue/task status event. Do not log routine progress chatter that does not change or document issue/task status. Do not update, replace, collapse, delete, or rewrite any previous log entry for the same issue or task.
 
 If later information becomes available, such as a PR number, merge commit, blocker resolution, or done status, append another line with that information instead of editing the earlier line.
 
-Multiple entries for the same issue or task are expected. The log should show the full timeline, such as:
+When a status event happens during branch work, add the log entry before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
+
+Multiple entries for the same issue or task are expected. The monthly log should show the full timeline, such as:
 
 ```text
 YYYY-MM-DD | GH-000 | agent:ready | Issue researched and ready for implementation | agent-name | feature/000

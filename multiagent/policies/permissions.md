@@ -16,11 +16,13 @@ Agents may do these without approval when scoped to the active task:
 - update GitHub Issue bodies and comments
 - update PR descriptions and comments
 - create or update local task files only for allowed `multiagent/tasks/` exceptions
-- append one-line work log entries
+- append one-line status-event entries to the current monthly work log
 - add handoff notes
 - run local test/build/lint commands
 
 Green actions do not include editing, replacing, collapsing, deleting, or rewriting previous work log entries.
+
+Green actions do not include pushing completed work and then creating a separate log-only follow-up commit for the matching status event. When the status event happens during branch work, the log entry must be included with the same work commit/PR.
 
 Green actions do not include committing or pushing directly to parent branches. Parent branch changes must follow `multiagent/policies/git.md` and go through pull requests only.
 

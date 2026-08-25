@@ -20,7 +20,7 @@ For the agent-perspective read order, use `docs/agentic-workflow.md`.
 multiagent/
   protocol.md              Process agents must follow
   tasks/                   Exception-only local task guidance and templates
-  logs/                    Target repo log README and monthly log template
+  logs/                    Target repo monthly work log README and template
   handoffs/                Target repo handoff guidance
   policies/                Permissions, restrictions, and safety rules
   templates/               Copy-ready templates
@@ -53,4 +53,4 @@ When working in a target repository, if an agent discovers something important, 
 - the PR description or comments
 - docs or an ADR when the information is durable project knowledge
 - a local task or handoff file only for allowed exceptions
-- a new append-only work log entry when the target repository uses work logs
+- a new append-only monthly work log entry when the target repository uses work logs

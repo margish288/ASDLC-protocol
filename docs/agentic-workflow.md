@@ -96,9 +96,11 @@ Read:
 4. `multiagent/templates/changelog-entry-template.md`
 5. `multiagent/logs/README.md`
 
-Use this step to record changed files, commands run, test results, behavior verified, known limitations, and a new append-only work log entry.
+Use this step to record changed files, commands run, test results, behavior verified, known limitations, and a new append-only status-event work log entry in the current monthly log.
 
-Work logs must preserve every meaningful issue/task event and status transition as a separate chronological line. Never rewrite an earlier log entry for the same issue or task.
+Work logs must preserve every meaningful issue/task status event as a separate chronological line. Never rewrite an earlier log entry for the same issue or task.
+
+When the status event happens during branch work, add the log entry before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
 
 ## GitHub Issue Triage
 

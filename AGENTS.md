@@ -125,7 +125,7 @@ Default flow:
 10. Create an approved work branch.
 11. Implement only the scoped sub-issue or implementation issue.
 12. Run relevant checks.
-13. Update GitHub Issue descriptions/comments, PRs, and linked sub-issues, then append a new one-line work log entry with evidence if the target repository uses work logs.
+13. Update GitHub Issue descriptions/comments, PRs, and linked sub-issues, then append the status-event work log entry to the current monthly log before committing the work if the target repository uses work logs.
 14. Open PR or leave handoff.
 15. Move GitHub Issue status forward only when linked implementation issues or execution sub-issues are complete.
 
@@ -175,15 +175,17 @@ An issue or allowed local task may only be marked `done` or `review` when:
 - done evidence is written in the GitHub Issue or PR
 - parent issue and sub-issue descriptions include findings, fixes, and verification evidence
 - all linked implementation issues and execution sub-issues are done before the parent is marked done
-- a new append-only entry is added to `multiagent/logs/<YYYY-MM>.md`
+- a new append-only status-event entry is added to `multiagent/logs/<YYYY-MM>.md` and included in the same work commit/PR
 - GitHub Issue status is updated
 - PR is opened if code changed
 
 ## Work Log Rules
 
-Work logs are append-only supplemental audit history. They do not replace GitHub as the source of truth. Agents must add a new log line for every meaningful issue/task event and status transition, including `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues or `ready`, `in_progress`, `review`, and `done` for repo-local tasks.
+Work logs are repo-level monthly files in `multiagent/logs/<YYYY-MM>.md`. They are append-only supplemental audit history and do not replace GitHub as the source of truth. Agents must add a new log line for every meaningful issue/task status event, including `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues or `ready`, `in_progress`, `review`, and `done` for repo-local tasks. Do not log routine progress chatter that does not change or document issue/task status.
 
 Agents must never edit, replace, collapse, delete, or rewrite previous log entries for the same issue or task. Multiple log lines for the same issue or task are expected and required because they preserve the chronological history of the work.
+
+When a status event happens during work on a branch, the log entry must be added before the related commit and included in the same commit/PR as the work or status change. Agents must not push code and then create a separate follow-up commit only to add the matching work log entry.
 
 ## Forbidden Actions
 
@@ -192,6 +194,7 @@ Agents must not:
 - commit or push directly to parent branches such as `main`, `master`, `dev`, `develop`, `staging`, or `qa`
 - commit secrets, tokens, `.env` files, private keys, or credentials
 - edit, replace, collapse, delete, or rewrite previous work log entries instead of appending a new log line
+- push completed work and then add the matching work log entry in a separate log-only follow-up commit
 - rewrite git history unless explicitly instructed
 - delete user work
 - make unrelated refactors

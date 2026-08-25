@@ -1,4 +1,6 @@
-Append one new line for each meaningful event or status transition. Never edit a previous line for the same issue or task. If later details become available, append another line.
+Append one new line to the current monthly log for each meaningful issue/task status event. Never edit a previous line for the same issue or task. If later details become available, append another line.
+
+When the status event happens during branch work, add this line before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
 
 ```text
 YYYY-MM-DD | GH-000 | status | one-line summary | agent-name | branch-or-pr

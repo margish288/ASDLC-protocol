@@ -118,7 +118,7 @@ Fill before review/done:
 - Behavior verified:
 - Parent/sub-issue descriptions updated:
 - Platform parent/sub-issue links updated:
-- Append-only work log entries added:
+- Append-only monthly work log entries added in the same commit/PR as the related status event:
 - Known limitations:
 
 ## Handoff Notes
