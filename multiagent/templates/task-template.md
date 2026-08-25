@@ -114,6 +114,7 @@ Fill before review/done:
 - Behavior verified:
 - Parent/sub-issue descriptions updated:
 - Platform parent/sub-issue links updated:
+- Append-only work log entries added:
 - Known limitations:
 
 ## Handoff Notes

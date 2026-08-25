@@ -1,8 +1,10 @@
-# Multiagent Workflow
+# Multiagent Workflow Template
 
-This directory contains the repo-local operating system for agents.
+This directory contains the reusable repo-local operating system for agents.
 
-GitHub Issues are the backlog. Files in this directory are the durable working memory.
+When this protocol is installed into a target repository, GitHub Issues are the backlog and files in this directory become durable working memory.
+
+In this protocol-template repository, keep only reusable instructions, policies, templates, and clearly marked examples. Do not create live task files, live monthly work logs, or handoff records here.
 
 GitHub Issues may start as `agent:needs-triage`. Agents should research, classify, and, when needed, decompose requirements before implementation.
 
@@ -15,9 +17,9 @@ For the agent-perspective read order, use `docs/agentic-workflow.md`.
 ```text
 multiagent/
   protocol.md              Process agents must follow
-  tasks/                   One task mirror per active task
-  logs/                    One-line chronological work log
-  handoffs/                Incomplete work handoffs
+  tasks/                   Target repo task README and task-file templates
+  logs/                    Target repo log README and monthly log template
+  handoffs/                Target repo handoff guidance
   policies/                Permissions, restrictions, and safety rules
   templates/               Copy-ready templates
 ```
@@ -42,10 +44,10 @@ Research must be written into the source issue or task before creating implement
 
 No important agent context should live only in chat.
 
-If an agent discovers something important, it must be written into:
+When working in a target repository, if an agent discovers something important, it must be written into:
 
 - the task file
 - a handoff file
 - docs
 - an ADR
-- or the one-line log
+- or a new append-only work log entry

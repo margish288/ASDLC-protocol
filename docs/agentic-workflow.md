@@ -96,7 +96,9 @@ Read:
 4. `multiagent/templates/changelog-entry-template.md`
 5. `multiagent/logs/README.md`
 
-Use this step to record changed files, commands run, test results, behavior verified, known limitations, and the one-line work log entry.
+Use this step to record changed files, commands run, test results, behavior verified, known limitations, and a new append-only work log entry.
+
+Work logs must preserve every meaningful issue/task event and status transition as a separate chronological line. Never rewrite an earlier log entry for the same issue or task.
 
 ## GitHub Issue Triage
 

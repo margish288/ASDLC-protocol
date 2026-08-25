@@ -166,11 +166,21 @@ Before moving to `review`, update:
 - done evidence
 - changed files
 - test results
-- one-line log
+- new append-only work log entry
 - GitHub Issue labels
 - PR link, if available
 
 Do not move a parent issue to `agent:done` until every linked implementation issue and execution sub-issue is done.
+
+## Work Logs
+
+Work logs in `multiagent/logs/` are append-only.
+
+Agents must add a new log line whenever they record a meaningful event or status transition for an issue or task. This includes `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues, and `ready`, `in_progress`, `review`, and `done` for repo-local tasks.
+
+Agents must never edit, replace, collapse, delete, or rewrite an earlier log entry for the same issue or task. Repeated issue/task IDs in the same monthly log are expected because the log is a chronological history, not a current-state table.
+
+If later information becomes available, such as a PR number, merge commit, blocker resolution, or done status, append another line with that information instead of editing the earlier line.
 
 ## Blocking The Task
 

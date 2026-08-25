@@ -1,37 +1,40 @@
-# Project Overview
+# Protocol Template Overview
 
-## What This Project Does
+## What This Repository Provides
 
-`[Explain the product/project in plain language.]`
+This repository provides a reusable agentic development protocol. It is a template made of Markdown instructions, policies, and sample file formats that agents should follow after the protocol is installed into a target repository.
+
+This repository is not itself a target product repository. Do not create live agent task files, monthly work logs, handoffs, or issue records here. Keep only reusable instructions, policies, templates, and clearly marked examples.
 
 ## Primary Users
 
-- User type 1:
-- User type 2:
+- Humans who want to install disciplined agent workflow rules into a repository.
+- Coding agents that need a clear operating protocol for target repository work.
 
 ## Main Capabilities
 
-- Capability 1
-- Capability 2
-- Capability 3
+- Defines agent read order and workflow discipline.
+- Defines issue research, decomposition, branching, permissions, testing, logging, and handoff rules.
+- Provides templates for task files, work logs, requirement breakdowns, handoffs, ADRs, and changelog entries.
 
 ## Non-Goals
 
-This project does not aim to:
+This repository does not aim to:
 
-- Non-goal 1
-- Non-goal 2
+- Host live work records for changes made to this protocol template.
+- Contain product-specific code, runtime configuration, deployments, or application tests.
+- Replace target repository customization after installation.
 
 ## Important External Systems
 
-- GitHub:
-- Database:
-- APIs:
-- Deployment:
-- Monitoring:
+- GitHub: target repositories may use GitHub Issues and PRs with this protocol.
+- Database: none.
+- APIs: none.
+- Deployment: none.
+- Monitoring: none.
 
-## Current Development Priorities
+## Current Maintenance Priorities
 
-- Priority 1
-- Priority 2
-- Priority 3
+- Keep instructions reusable and target-repository agnostic.
+- Keep examples clearly marked as examples or templates.
+- Avoid committing live task/log artifacts from protocol-template maintenance.

@@ -14,9 +14,11 @@ Agents may do these without approval when scoped to the active task:
 - create linked execution sub-issues from a researched ready implementation issue
 - update non-terminal GitHub triage labels
 - update task files
-- update one-line logs
+- append one-line work log entries
 - add handoff notes
 - run local test/build/lint commands
+
+Green actions do not include editing, replacing, collapsing, deleting, or rewriting previous work log entries.
 
 Green actions do not include committing or pushing directly to parent branches. Parent branch changes must follow `multiagent/policies/git.md` and go through pull requests only.
 

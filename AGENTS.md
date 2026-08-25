@@ -1,6 +1,8 @@
-# Agent Instructions
+# Agent Protocol Template Instructions
 
-This repository is designed for agentic development. Any coding agent must be able to enter the repo, understand the project, pick work, complete it, and leave durable handoff context for the next human or agent.
+This repository is the agentic development protocol template. It defines reusable rules, policies, and file templates that agents copy into or follow inside a target repository.
+
+Do not treat this repository itself as a target product repository. When editing this protocol template, do not create live task files in `multiagent/tasks/`, live monthly work logs in `multiagent/logs/`, handoffs, or other runtime work records. Those files are created only inside a target repository that has installed this protocol.
 
 ## First Read Order
 
@@ -17,28 +19,25 @@ Before making changes, read these files:
 9. `multiagent/policies/decomposition.md` when triaging or splitting requirements
 10. Relevant task file in `multiagent/tasks/`
 
-## Project Summary
+## Template Summary
 
-Project name: `[PROJECT_NAME]`
+Template name: Agentic SDLC Protocol
 
 One-line purpose:
 
-> `[WHAT_THIS_PROJECT_DOES]`
+> Reusable Markdown protocol and templates that teach coding agents how to research, decompose, document, implement, verify, and hand off work in a target repository.
 
-Primary stack:
+Primary contents:
 
-- Language: `[LANGUAGE]`
-- Framework: `[FRAMEWORK]`
-- Styling/UI: `[STYLING_OR_UI]`
-- Database: `[DATABASE_OR_NONE]`
-- Package manager: `[PACKAGE_MANAGER]`
-- Test runner: `[TEST_RUNNER]`
-- Runtime: `[RUNTIME]`
-- Deployment target: `[DEPLOYMENT_TARGET_OR_UNKNOWN]`
+- Language: Markdown
+- Policies: `multiagent/policies/`
+- Templates: `multiagent/templates/`
+- Target repo task examples: `multiagent/tasks/README.md`
+- Target repo log examples: `multiagent/logs/README.md` and `multiagent/logs/YYYY-MM.md`
 
 ## Project Setup Notes
 
-This protocol must be tailored to the target repository when installed:
+This protocol must be tailored to the target repository when installed. Replace placeholders in the target repository copy:
 
 - `[IMPORTANT_ENTRYPOINT_1]`
 - `[IMPORTANT_ENTRYPOINT_2]`
@@ -112,7 +111,7 @@ Default flow:
 10. Create an approved work branch.
 11. Implement only the scoped sub-issue or implementation issue.
 12. Run relevant checks.
-13. Update issue descriptions, task file, and one-line log with evidence.
+13. Update issue descriptions and task file, then append a new one-line work log entry with evidence.
 14. Open PR or leave handoff.
 15. Move task status forward only when linked implementation issues or execution sub-issues are complete.
 
@@ -162,9 +161,15 @@ A task may only be marked `done` or `review` when:
 - done evidence is written
 - parent issue and sub-issue descriptions include findings, fixes, and verification evidence
 - all linked implementation issues and execution sub-issues are done before the parent is marked done
-- `multiagent/logs/<YYYY-MM>.md` is updated
+- a new append-only entry is added to `multiagent/logs/<YYYY-MM>.md`
 - GitHub Issue or task status is updated
 - PR is opened if code changed
+
+## Work Log Rules
+
+Work logs are append-only. Agents must add a new log line for every meaningful issue/task event and status transition, including `agent:ready`, `agent:in-progress`, `agent:review`, and `agent:done` for GitHub Issues or `ready`, `in_progress`, `review`, and `done` for repo-local tasks.
+
+Agents must never edit, replace, collapse, delete, or rewrite previous log entries for the same issue or task. Multiple log lines for the same issue or task are expected and required because they preserve the chronological history of the work.
 
 ## Forbidden Actions
 
@@ -172,6 +177,7 @@ Agents must not:
 
 - commit or push directly to parent branches such as `main`, `master`, `dev`, `develop`, `staging`, or `qa`
 - commit secrets, tokens, `.env` files, private keys, or credentials
+- edit, replace, collapse, delete, or rewrite previous work log entries instead of appending a new log line
 - rewrite git history unless explicitly instructed
 - delete user work
 - make unrelated refactors

@@ -1,6 +1,8 @@
 # Tasks
 
-Create one task file per active GitHub Issue or repo-local task.
+In a target repository, create one task file per active GitHub Issue or repo-local task.
+
+In this protocol-template repository, do not create live `GH-*` or `TASK-*` files. Keep this directory limited to reusable guidance and template references.
 
 Use `multiagent/templates/task-template.md` as the starting point.
 

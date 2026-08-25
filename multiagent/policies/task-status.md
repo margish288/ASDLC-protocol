@@ -95,6 +95,8 @@ Issues labeled `issue-points:over-8` should also be labeled `agent:needs-breakdo
 
 Only one active agent should claim a task.
 
+Every status transition must append a new work log entry in `multiagent/logs/<YYYY-MM>.md`. Do not update or replace an earlier log entry for the same issue or task.
+
 Do not move a task to `review` unless:
 
 - code is complete
@@ -102,6 +104,7 @@ Do not move a task to `review` unless:
 - done evidence is written
 - linked execution sub-issues are done when the task has sub-issues
 - parent issue description has summaries of findings, fixes, and verification evidence
+- a new `review` work log entry has been appended
 - PR exists when code changed
 
 Do not move a task to `done` unless:
@@ -109,3 +112,4 @@ Do not move a task to `done` unless:
 - PR is merged, or
 - human explicitly accepts completion
 - all linked implementation issues and execution sub-issues are done when the task is a parent issue
+- a new `done` work log entry has been appended
