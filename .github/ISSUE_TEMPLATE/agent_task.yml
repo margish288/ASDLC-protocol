@@ -83,7 +83,7 @@ body:
     id: issue_points
     attributes:
       label: Issue Points
-      description: Estimate total implementation, verification, and documentation effort. Anything over 8 issue points should be broken into sub-issues.
+      description: Estimate total implementation, verification, and documentation effort. Work over 8 issue points must be split into separate implementation issues, not execution sub-issues.
       options:
         - 1 issue point
         - 2 issue points

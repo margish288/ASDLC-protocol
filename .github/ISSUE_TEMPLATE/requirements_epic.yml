@@ -71,7 +71,7 @@ body:
     id: estimated_issue_points
     attributes:
       label: Estimated Issue Points
-      description: Estimate total work if known. Anything over 8 issue points should be split into child issues.
+      description: Estimate total work if known. Work over 8 issue points must be split into separate implementation issues, not execution sub-issues.
       options:
         - Unknown
         - 1 issue point

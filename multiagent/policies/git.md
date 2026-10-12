@@ -34,7 +34,7 @@ research/<issue-number>
 hotfix/<issue-number>
 ```
 
-Use the GitHub Issue number for `<issue-number>`. For repo-local tasks without a GitHub Issue, use the local task number in the same position.
+Use the active tracker's GitHub Issue number or Local task number for `<issue-number>`. Check the tracking policy's identity map and existing branches to avoid collisions. Preserve an active branch/PR after migration rather than renaming it to a new tracker ID. Sequential execution children may share their implementation parent's branch as recorded by the ownership policy.
 
 Prefix meanings:
 
@@ -64,8 +64,12 @@ Use:
 GH-123: short imperative summary
 ```
 
-For repo-only tasks:
+For Local tasks:
 
 ```text
 TASK-000: short imperative summary
 ```
+
+Use the record's current display ID and retain migration aliases in the task/PR. Docs, tests, refactors, and maintenance use `feature/<number>` for planned changes, `bugfix/<number>` for defects, or `research/<number>` for investigations; do not invent additional prefixes.
+
+Log handling follows `multiagent/policies/logging.md`. Ignored protocol/state files must not be force-added to satisfy a commit rule. Tracked records and code reach parent branches only through PRs. Host/CI protection is defined in `multiagent/policies/enforcement.md`.

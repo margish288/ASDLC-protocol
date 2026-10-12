@@ -1,121 +1,63 @@
 # Task Status Policy
 
-## Local Task Statuses
+The selected tracker owns current status. Local records use the Local values below; GitHub uses exactly one corresponding active `agent:*` status label. Change status only after its gate is satisfied, preserving priority/type/estimate labels.
 
-GitHub labels are authoritative for normal work. These local statuses apply only to allowed `multiagent/tasks/` exception files.
+## Status Mapping
 
-`backlog`
+| Local | GitHub label | Meaning |
+| --- | --- | --- |
+| backlog | agent:needs-triage | Captured, awaiting research |
+| needs_clarification | agent:needs-clarification | Requires a human decision |
+| needs_breakdown | agent:needs-breakdown | Requires decomposition |
+| split | agent:split | Parent tracking linked work |
+| ready | agent:ready | Researched, scoped, unblocked, at most eight points |
+| in_progress | agent:in-progress | Claimed implementation |
+| blocked | agent:blocked | Cannot proceed; blocker recorded |
+| review | agent:review | Implementation and evidence ready for review |
+| done | agent:done | Verified merged/accepted completion |
+| cancelled | agent:cancelled | Explicitly abandoned/not planned; not successful completion |
 
-Task exists but is not ready.
+Normal flow: `backlog -> ready -> in_progress -> review -> done`. Clarification and breakdown happen before ready. Work may become blocked or return from review for changes. A split parent aggregates its linked work rather than being claimed as an oversized implementation item.
 
-`ready`
+## Readiness And Review
 
-Task has enough context and acceptance criteria.
+Ready requires research, clear acceptance criteria, verification expectations, known dependencies, no unresolved blocker, and an implementation estimate at most eight issue points. Use the decomposition policy for oversized work.
 
-`in_progress`
+Review requires all of:
 
-Task is claimed and actively being worked.
+- scoped implementation is complete and acceptance criteria have evidence;
+- relevant checks passed, or any unavailable checks and residual risk have explicit reviewer acceptance; failed required checks cannot be represented as passing;
+- findings, fixes, changed files, and commands/results are in the authoritative record or linked PR;
+- a PR exists when code changed;
+- required execution children are review-ready or done, with evidence linked;
+- a review status event is durably recorded using the logging policy.
 
-`blocked`
+A parent and its execution children may enter review together in one PR. Children do not need to be merged before their shared PR can be reviewed. Independent prerequisite work needed for integration must still be available and verified.
 
-Task cannot continue without input or external fix.
+## Completion
 
-`review`
+Done requires all of:
 
-Implementation is complete and ready for review.
+- implementation acceptance criteria and required verification are satisfied;
+- the associated PR is verified merged, or the human explicitly accepts the documented non-merged outcome (for example, completed research);
+- every required linked implementation item and execution sub-issue is done;
+- parent summaries include findings, fixes, and verification;
+- the actual completion event is durable in the selected tracker and delivered or pending export under the logging policy.
 
-`done`
+Human acceptance never permits bypassing branch protection or treating unmerged code as deployed. Distinguish merged, accepted research, and deployed outcomes in the evidence. For a shared PR, after verifying merge, mark execution children done first, then the implementation parent, then any overall tracking parent.
 
-Task is merged, accepted, or explicitly completed.
+Cancellation is a separate outcome with a reason and authorization; a closed GitHub issue alone is not proof of completion. If a required child is cancelled, its parent cannot be marked done until scope/acceptance criteria and required relationships are explicitly revised and the exclusion explained. Preserve historical links.
 
-## GitHub Triage Labels
+When reopening work, record why, clear the terminal status, reassess readiness and ownership, and append a new event. Never rewrite the old completion event.
 
-`agent:needs-triage`
+## Labels And Metadata
 
-Issue exists but has not been classified for readiness.
+For GitHub mode, create or verify the status labels in the table and these metadata labels during setup:
 
-`agent:needs-clarification`
+- Priority: `priority:P0`, `priority:P1`, `priority:P2`, `priority:P3`.
+- Type: `type:feature`, `type:bug`, `type:research`, `type:refactor`, `type:docs`, `type:test`, `type:chore`.
+- Estimate: `issue-points:1` through `issue-points:8`, and `issue-points:over-8`.
 
-Issue needs human input before implementation.
+Local mode uses corresponding fields in task files and does not create GitHub labels. One issue point equals one hour of expected implementation, verification, and documentation. An over-eight estimate requires decomposition before implementation; do not use an atomic-work exception to silently bypass this gate.
 
-`agent:needs-breakdown`
-
-Issue is too large, vague, over 8 issue points, or separable and should be decomposed before implementation. Issues over 8 issue points must be split into separate implementation issues, not execution sub-issues.
-
-`agent:split`
-
-Parent issue has linked implementation issues or execution sub-issues and tracks overall progress.
-
-`agent:ready`
-
-Issue is clear, scoped, and ready for implementation.
-
-`agent:blocked`
-
-Issue cannot proceed because of an external dependency, missing access, or unresolved blocker.
-
-## Issue Point Labels
-
-Use issue points instead of size labels.
-
-```text
-1 issue point = 1 hour
-```
-
-Recommended labels:
-
-- `issue-points:1`
-- `issue-points:2`
-- `issue-points:3`
-- `issue-points:4`
-- `issue-points:5`
-- `issue-points:6`
-- `issue-points:7`
-- `issue-points:8`
-- `issue-points:over-8`
-
-Issues labeled `issue-points:over-8` should also be labeled `agent:needs-breakdown` unless a human explicitly approves keeping the work atomic.
-
-## Priority Labels
-
-- `priority:P0`: urgent priority; handle before P1/P2/P3.
-- `priority:P1`: high priority; handle after P0 and before P2/P3.
-- `priority:P2`: medium priority; handle after P0/P1 and before P3.
-- `priority:P3`: low priority; handle after P0/P1/P2.
-
-## Type Labels
-
-- `type:feature`: new user-facing or product capability.
-- `type:bug`: bug fix or regression work.
-- `type:research`: research, investigation, or discovery work.
-- `type:refactor`: internal code improvement that should preserve behavior.
-- `type:docs`: documentation-only work.
-- `type:test`: test coverage, test tooling, or verification work.
-- `type:chore`: maintenance, housekeeping, or non-product task.
-
-## Status Rules
-
-Only one active agent should claim a GitHub Issue or allowed local task.
-
-For normal work, use GitHub labels, issue body, issue comments, linked sub-issues, PRs, and PR comments as the authoritative status record. Do not create or update a local task file unless the work falls under an allowed `multiagent/tasks/` exception.
-
-Every status transition must append a new work log entry in the current repo-level monthly log at `multiagent/logs/<YYYY-MM>.md`. Do not update or replace an earlier log entry for the same issue or task.
-
-When a status transition happens during branch work, the log entry must be added before committing and included in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status transition.
-
-Do not move a task to `review` unless:
-
-- code is complete
-- tests/checks are recorded
-- done evidence is written in the GitHub Issue or PR
-- linked execution sub-issues are done when the task has sub-issues
-- parent issue description has summaries of findings, fixes, and verification evidence
-- a new `review` work log entry has been appended
-- PR exists when code changed
-
-Do not move a task to `done` unless:
-
-- PR is merged, or
-- human explicitly accepts completion
-- all linked implementation issues and execution sub-issues are done when the task is a parent issue
-- a new `done` work log entry has been appended
+Claiming and stale-owner handling are governed by the ownership policy. Every meaningful status transition follows the append-only logging policy; delivery bookkeeping is not a new product status transition.

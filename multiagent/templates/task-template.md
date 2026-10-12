@@ -1,132 +1,108 @@
 ---
-id: GH-000
-source: github
-github_issue: 000
+record_uid: ""
+id: TASK-000
+aliases: []
+requirement_keys: []
+source_references: []
+record_role: authoritative
+source: local
+source_url:
 title: ""
-status: ready
+kind: implementation
+status: backlog
+outcome:
 priority: P2
-sequence: 000
+type: feature
+sequence: 0
 issue_points:
+tracking_parent:
+parent:
+implementation_items: []
+execution_children: []
 depends_on: []
 claimed_by:
+claim_token:
+claimed_at:
+last_checkpoint:
+affected_areas: []
 branch:
+worktree:
 pr:
-created_at: YYYY-MM-DD
-updated_at: YYYY-MM-DD
+created_at:
+updated_at:
+imported_at:
+migration_id:
 ---
 
-# GH-000: Task Title
+# Task Title
 
-Use this template only for allowed `multiagent/tasks/` exceptions: repo-only tasks without GitHub Issues, temporary local planning, explicit human request, or complex handoff notes. Do not create a local task file for every GitHub Issue by default.
+Use for Local work records; in GitHub mode use these content sections in issue descriptions. Supplemental local notes must set `record_role: supplemental` and link their authoritative record. Select status and relationships using the tracking, task-status, and decomposition policies.
 
-GitHub Issues, labels, issue bodies, comments, linked sub-issues, PRs, and PR comments remain authoritative.
+Generate a stable unique `record_uid` for new work. Preserve it, source identities, and aliases across migration. `outcome` distinguishes completed, cancelled, duplicate, or unknown historical results. Do not treat this example as a ready task.
 
-## Goal
+## Goal And Context
 
-Describe the outcome this task should achieve.
+Describe the outcome, background, and original requirement. Preserve user-authored acceptance criteria.
 
 ## Acceptance Criteria
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
-
-## Context
-
-Relevant background, links, issue notes, or constraints.
+- [ ] Observable condition
 
 ## Research Summary
 
-Record what was inspected before splitting, creating sub-issues, or coding.
+- Source document sections/revisions and stable requirement keys:
+- Requirement classification and scope authorization:
+- Existing implementation and duplicate task checks:
 
-- Issue/task notes:
-- Relevant docs:
-- Relevant code/tests:
-- Dependencies:
-- Risks/unknowns:
-- Estimate:
+- Files, task history/comments, docs, and tests inspected:
+- Findings and likely root cause:
+- Dependencies and risks:
+- Unknowns and decisions required:
+- Verification expectation:
+- Estimate and decomposition decision:
 
 ## Linked Work
 
-Use this section for parent issue tracking.
-
-- Implementation issues:
-- Execution sub-issues:
-- Parent/sub-issue platform links:
-- Current status:
-- Parent summary:
-
-## Affected Areas
-
-- `path/to/file`
-- `path/to/module`
-
-## Issue Points
-
-Estimate total implementation, verification, and documentation work.
-
-```text
-1 issue point = 1 hour
-```
-
-- Estimate:
-- Over 8 issue points:
-  - [ ] yes, split before implementation
-  - [ ] no
-
-## Policy Notes
-
-This task touches:
-
-- [ ] authentication/authorization
-- [ ] database/migrations
-- [ ] dependencies
-- [ ] public API
-- [ ] deployment/config
-- [ ] security/privacy
-- [ ] generated files
-
-Required approval:
-
-- [ ] yes
-- [ ] no
-
-Reason:
+- Tracking parent or execution parent:
+- Independent implementation items:
+- Execution children and reciprocal relationships:
+- Dependencies, sequence, and status:
+- Parent summary of findings, fixes, blockers, and remaining work:
 
 ## Implementation Notes
 
-Record discoveries, findings, fixes, and important choices while working. Mirror important findings and fixes into the relevant issue or sub-issue description when permissions allow.
+Record discoveries, design decisions, fixes, scope changes, and changed files as work progresses.
 
-## Test Requirements
+## Permissions
 
-Expected checks:
+- Sensitive areas or public contracts affected:
+- Required approval and existing authorization:
+- Justification for shared/configuration changes:
 
-- [ ] unit tests
-- [ ] integration tests
-- [ ] e2e tests
-- [ ] lint
-- [ ] build
-- [ ] manual verification
+## Ownership And Handoff
 
-## Done Evidence
+- Owner / claim token / timestamp / last checkpoint:
+- Branch / worktree / PR:
+- Overlapping work and coordination:
+- Blockers / remaining work / next safe action:
+- Release or transfer evidence:
 
-Fill before review/done:
+## Verification And Acceptance
 
-- Changed files:
-- Commands run:
-- Test results:
-- Behavior verified:
-- Parent/sub-issue descriptions updated:
-- Platform parent/sub-issue links updated:
-- Append-only monthly work log entries added in the same commit/PR as the related status event:
-- Known limitations:
+- Acceptance criteria evidence:
+- Actual commands and results:
+- Skipped checks, reason, residual risk, and reviewer acceptance:
+- Parent/child descriptions updated:
+- Review evidence and PR:
+- Verified merge or explicit acceptance:
+- Outcome and remaining limitations:
 
-## Handoff Notes
+## History
 
-Use this if incomplete or risky.
+Append actual status events using `multiagent/templates/changelog-entry-template.md`. Preserve prior entries. In Local mode this is the durable outbox for tracked monthly logs. Record export delivery separately by event ID after its maintenance PR merges. Imports retain original provenance; do not fabricate past transitions.
 
-## Links
+## Links And Provenance
 
-- GitHub Issue:
-- PR:
-- Related ADR:
+- Original record and aliases:
+- PRs, related docs, and decisions:
+- Migration ID, original timestamps, and import limitations:

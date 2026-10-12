@@ -1,17 +1,10 @@
 ---
-description: Project-wide agentic development rules
+description: Agentic SDLC protocol entry point
 alwaysApply: true
 ---
 
-This repo uses a shared agentic development protocol.
+Read root AGENTS.md before making changes. In the protocol source repository, follow its template-maintenance instructions and do not create runtime records.
 
-Before editing code:
+In installed target repositories, read .agent-protocol/AGENTS.md and installation.json to identify the selected tracker and canonical policies. Preserve existing project instructions. Do not assume both local tasks and GitHub Issues are authoritative.
 
-1. Read `AGENTS.md`
-2. Read `docs/agentic-workflow.md`
-3. Read `multiagent/protocol.md`
-4. Read relevant policy files in `multiagent/policies/`
-5. Classify the requirement before implementation
-6. Work only from a GitHub Issue labeled `agent:ready` or a `multiagent/tasks/` task file with `status: ready`
-
-Follow `AGENTS.md` as the source of truth.
+This adapter points to the protocol; it does not define a separate workflow.

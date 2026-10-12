@@ -1,34 +1,9 @@
-# Work Logs
+# Monthly Work Logs
 
-In a target repository, keep repo-level monthly work logs here. Work logs are append-only supplemental audit history. They do not replace GitHub as the source of truth.
+The canonical rules live in [logging policy](../policies/logging.md). Use one repository-level file per UTC month, `<YYYY-MM>.md`, at the manifest's configured log path.
 
-In this protocol-template repository, do not create real monthly work log files. Keep only this README and reusable monthly templates such as `YYYY-MM.md`.
+Logs are append-only status history. Multiple entries for one issue/task are expected. Use stable event IDs for retry detection and references to corrections. Do not rewrite prior entries.
 
-Agents must add a new line for every meaningful issue/task status event. Do not log routine progress chatter that does not change or document issue/task status. Do not update, replace, collapse, delete, or rewrite any previous log entry for the same issue or task.
+Copy the structure, not the illustrative entries, from [the monthly template](YYYY-MM.md). Ignored logs stay local. Explicitly tracked logs accompany related work commits; late events use the configured batch maintenance PR path.
 
-If later information becomes available, such as a PR number, merge commit, blocker resolution, or done status, append another line with that information instead of editing the earlier line.
-
-When a status event happens during branch work, add the log entry before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
-
-Multiple entries for the same issue or task are expected. The monthly log should show the full timeline, such as:
-
-```text
-YYYY-MM-DD | GH-000 | agent:ready | Issue researched and ready for implementation | agent-name | feature/000
-YYYY-MM-DD | GH-000 | agent:in-progress | Claimed issue and started implementation | agent-name | feature/000
-YYYY-MM-DD | GH-000 | agent:review | Opened PR with implementation and verification evidence | agent-name | PR #000
-YYYY-MM-DD | GH-000 | agent:done | PR merged and issue completed | agent-name | PR #000 / commit
-```
-
-Use one file per month:
-
-```text
-YYYY-MM.md
-```
-
-For example, work done in a given month belongs in:
-
-```text
-YYYY-MM.md
-```
-
-Copy the format from `multiagent/logs/YYYY-MM.md`.
+This source repository keeps only this guidance and the reusable template. Do not add live monthly logs here.

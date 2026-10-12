@@ -5,9 +5,23 @@ from_agent:
 to_agent: next
 created_at: YYYY-MM-DDTHH:MM:SSZ
 branch:
+worktree:
+claim_token:
+last_checkpoint:
+tracker:
+authoritative_record:
 ---
 
 # Handoff: GH-000
+
+Use the active tracker's identity, including TASK identifiers in Local mode. Keep the authoritative handoff in that tracker; a separate file is optional and must be accessible to the receiving agent.
+
+## Ownership Transfer
+
+- Current owner and claim:
+- Release or accepted transfer:
+- Uncommitted work to preserve:
+- Overlapping work and coordination:
 
 ## Current Status
 

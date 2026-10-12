@@ -1,163 +1,44 @@
----
-source_issue:
-triage_outcome: agent:needs-breakdown
-triaged_by:
-created_at: YYYY-MM-DD
-updated_at: YYYY-MM-DD
----
-
 # Requirements Breakdown
 
-## Source Issue
+Use in the selected tracker's source description. See `multiagent/policies/decomposition.md`; this template does not define alternate split rules.
 
-- Issue:
-- Title:
-- Link:
+## Source And Research
 
-## Requirement Summary
+- Source ID / stable UID / link:
+- Document sections/revisions and stable requirement keys:
+- Authorized scope and existing-task/implementation checks:
+- Goal and acceptance criteria:
+- Relevant records, docs, code, and tests inspected:
+- Findings:
+- Dependencies, risks, and unknowns:
+- Estimate in issue points:
+- Classification and rationale:
+- Clarifications required:
 
-Summarize the requested outcome in plain language.
+## Separate Implementation Items
 
-## Research Summary
+Use for oversized or independently deliverable scope. These are independent implementation records, not execution children. Each must fit the policy's estimate and verification limits.
 
-Record what was inspected before creating implementation issues or execution sub-issues.
+| ID / link | Goal and acceptance criteria | Dependencies | Estimate | Sequence | Verification | Status |
+| --- | --- | --- | --- | --- | --- | --- |
 
-- Issue description/comments:
-- Relevant docs:
-- Relevant code/tests:
-- Dependencies:
-- Risks/unknowns:
-- Verification expectation:
+Research each implementation item independently and record its findings before creating execution children.
 
-## Issue Points
+## Execution Children
 
-```text
-1 issue point = 1 hour of expected implementation, verification, and documentation work
-```
+Use within a researched, ready implementation item when useful for separable steps.
 
-Issues over 8 issue points should be split into separate implementation issues before coding, not execution sub-issues.
+| ID / link | Parent link | Goal and acceptance criteria | Dependencies | Estimate | Sequence | Verification | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 
-## Readiness Check
+Each child description includes research findings, fixes, changed files, and verification evidence. In GitHub mode establish native relationships when supported. In Local mode keep reciprocal `parent` and `execution_children` fields.
 
-- [ ] clear goal
-- [ ] clear acceptance criteria
-- [ ] enough context to begin
-- [ ] test or verification expectation
-- [ ] reasonable scope for one PR
-- [ ] estimated at 8 issue points or less
-- [ ] no unresolved product decision
-- [ ] dependencies are known
+## Parent Updates
 
-Issue point estimate:
-
-- Parent estimate:
-- Split into separate implementation issues required because estimate is over 8 issue points: yes/no
-- Execution sub-issues needed after implementation issue research: yes/no
-
-## Ambiguities / Questions
-
-- Question 1:
-- Question 2:
-
-## Proposed Implementation Issues
-
-Use this section when the source issue is over 8 issue points. These are separate implementation issues, not execution sub-issues.
-
-### 1. Implementation Issue Title
-
-Goal:
-
-Acceptance criteria:
-
-- [ ] Criterion 1
-- [ ] Criterion 2
-
-Dependencies:
-
-- Depends on:
-- Blocks:
-
-Labels:
-
-- `agent:ready`
-- `priority:P2`
-- `type:feature`
-- `issue-points:1`
-
-Issue points:
-
-- 1
-
-Verification:
-
-- Expected command or manual check:
-
-Sequence:
-
-- 1
-
-Parent issue update summary:
-
-- Research summary to add:
-- Link/status line to add:
-- Remaining work summary:
-
-## Proposed Execution Sub-Issues
-
-Use this section after researching a ready implementation issue estimated at 8 issue points or less.
-
-### 1. Execution Sub-Issue Title
-
-Parent issue link:
-
-Platform parent/sub-issue link:
-
-Goal:
-
-Acceptance criteria:
-
-- [ ] Criterion 1
-- [ ] Criterion 2
-
-Dependencies:
-
-- Depends on:
-- Blocks:
-
-Research findings:
-
-- Finding 1:
-
-Implementation or fix notes:
-
-- Note 1:
-
-Labels:
-
-- `agent:ready`
-- `priority:P2`
-- `type:feature`
-- `issue-points:1`
-
-Issue points:
-
-- 1
-
-Verification:
-
-- Expected command or manual check:
-
-Sequence:
-
-- 1
-
-## Parent Issue Updates
-
-- [ ] Add `agent:split`
-- [ ] Remove `agent:ready`
-- [ ] Add research summary to parent issue description
-- [ ] Link all implementation issues or execution sub-issues
-- [ ] Use platform parent/sub-issue relationships where available
-- [ ] Add progress checklist to parent
-- [ ] Add finding and fix summaries to parent as linked work completes
-- [ ] Leave parent open until all linked implementation issues and execution sub-issues are done
+- Research summary and decomposition decision:
+- Linked implementation items or execution children:
+- Current status and progress:
+- Findings/fixes summarized from completed or review-ready work:
+- Blockers and remaining work:
+- Review evidence when required children are review-ready or done:
+- Completion evidence only after all required linked work is done:

@@ -14,6 +14,8 @@ This repository is not itself a target product repository. Do not create live ag
 ## Main Capabilities
 
 - Defines agent read order and workflow discipline.
+- Turns existing documentation into researched, deduplicated tasks and execution children in the selected tracker, then continues authorized implementation.
+- Keeps target ASDLC setup/runtime files ignored by default while preserving normal product tracking.
 - Defines issue research, decomposition, branching, permissions, testing, logging, and handoff rules.
 - Provides templates for task files, work logs, requirement breakdowns, handoffs, ADRs, and changelog entries.
 
@@ -27,7 +29,8 @@ This repository does not aim to:
 
 ## Important External Systems
 
-- GitHub: target repositories use GitHub Issues and PRs as the authoritative work record with this protocol.
+- Work tracking: target repositories choose Local task records or GitHub Issues. Only the selected tracker is authoritative for active work.
+- Git/PR host: code review and merge evidence in both modes; production protection is verified separately from protocol installation.
 - Database: none.
 - APIs: none.
 - Deployment: none.

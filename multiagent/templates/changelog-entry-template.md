@@ -1,16 +1,11 @@
-Append one new line to the current monthly log for each meaningful issue/task status event. Never edit a previous line for the same issue or task. If later details become available, append another line.
+# Status Event Format
 
-When the status event happens during branch work, add this line before committing and include it in the same commit/PR as the related work or status change. Do not push completed work and then create a separate log-only follow-up commit for the matching status event.
+Append one new event for an actual status transition. Follow `multiagent/policies/logging.md` for storage, event IDs, retries, work commits, and post-merge delivery.
 
 ```text
-YYYY-MM-DD | GH-000 | status | one-line summary | agent-name | branch-or-pr
+YYYY-MM-DDTHH:MM:SSZ | unique-event-id | GH-123-or-TASK-042 | actual-status | one-line-summary | agent-name | evidence-reference
 ```
 
-Example:
+Use the real UTC timestamp, selected tracker's identity/status, and evidence that already exists. A correction references the original event ID in a new line. Never insert a guessed PR number, future completion, or fabricated imported history.
 
-```md
-YYYY-MM-DD | GH-123 | agent:ready | Issue researched and ready for implementation | agent-name | feature/123
-YYYY-MM-DD | GH-123 | agent:in-progress | Claimed issue and started implementation | agent-name | feature/123
-YYYY-MM-DD | GH-123 | agent:review | Opened PR with implementation and verification evidence | agent-name | PR #456
-YYYY-MM-DD | GH-123 | agent:done | PR merged and issue completed | agent-name | PR #456 / commit
-```
+Tracked events known before a work commit go in that commit. Actual review/done events arising later go into the durable outbox and configured batch maintenance PR when no further work commit is needed. Local logs are appended immediately and remain ignored.

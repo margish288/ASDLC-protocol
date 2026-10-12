@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "setup_status": "pending",
+  "protocol_version": "2.0.0",
+  "source_url": "",
+  "source_revision": "",
+  "installed_at": "",
+  "protocol_storage": "local",
+  "tracker": {
+    "mode": null,
+    "repository": null,
+    "local_path": ".agent-protocol/state/tasks",
+    "local_storage": "local",
+    "backup_or_sharing": null
+  },
+  "logging": {
+    "storage": "local",
+    "path": ".agent-protocol/state/logs",
+    "timezone": "UTC",
+    "maintenance_owner": null,
+    "maintenance_cadence": null,
+    "maintenance_pr_base": null,
+    "event_outbox": null
+  },
+  "ownership": {
+    "mode": "single-writer",
+    "coordinator": null,
+    "claim_store": null,
+    "stale_after_hours": 24
+  },
+  "discovery": {
+    "method": null,
+    "tool": null,
+    "verified": false
+  },
+  "enforcement": {
+    "status": "pending",
+    "evidence": null,
+    "owner": null
+  },
+  "last_migration_id": null
+}

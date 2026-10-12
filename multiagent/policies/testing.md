@@ -26,15 +26,10 @@ Examples:
 
 ## Project Commands
 
-```bash
-[TEST_COMMAND]
-[TYPECHECK_COMMAND]
-[LINT_COMMAND]
-[BUILD_COMMAND]
-```
+Read actual commands from the target's `project/context.md` and repository configuration. Never execute template placeholders. Required CI checks and review gates are configured through the enforcement policy.
 
 ## Done Evidence
 
-A GitHub Issue or allowed local task cannot move to `review` without test evidence.
+A task in either tracker cannot move to `review` without verification evidence, following the task-status gates. Record the tested commit or working-tree state so later changes cannot reuse stale evidence.
 
 If tests cannot be run, explain why and mark residual risk.

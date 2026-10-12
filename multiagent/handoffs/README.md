@@ -1,25 +1,9 @@
 # Handoffs
 
-In a target repository, GitHub Issues and PRs are the authoritative handoff record. Use this directory only for complex handoffs that need repo-local durable notes beyond GitHub or when explicitly requested.
+Keep the primary handoff in the selected tracker: the Local task description or GitHub Issue/PR. Use `multiagent/templates/handoff-template.md`.
 
-In this protocol-template repository, do not create live handoff files.
+A separate file is optional for complex durable context or an explicit request. Store it under the configured target state location, link it from the task, and make it accessible to the receiving agent. An ignored local file is not a cross-machine handoff.
 
-Start from `multiagent/templates/handoff-template.md`.
+Include current status, owner/claim transfer, branch/worktree, changed files, evidence, remaining work, blockers, risks, and next action. Preserve unfinished user work.
 
-## Naming
-
-```text
-GH-123-short-title-handoff.md
-TASK-000-short-title-handoff.md
-```
-
-## Required Contents
-
-- current status
-- what changed
-- what remains
-- blockers
-- commands run
-- important context
-- risks
-- recommended next step
+Do not create live handoffs in this protocol source repository.

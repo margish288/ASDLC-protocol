@@ -4,9 +4,7 @@ Adding dependencies requires human approval unless the task explicitly authorize
 
 ## Current Dependency Profile
 
-- Runtime: `[RUNTIME_DEPS]`
-- Development: `[DEV_DEPS]`
-- Package manager: `[PACKAGE_MANAGER]`
+Read actual runtime/development dependencies and package manager details from the target manifests and installed `project/context.md`. Do not add a dependency merely because an example protocol check mentions a tool.
 
 ## Before Proposing A Dependency
 

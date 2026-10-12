@@ -1,13 +1,7 @@
 # Claude Instructions
 
-This repo uses a shared agentic development protocol.
+Read `AGENTS.md` first. In this source repository it defines template maintenance and prohibits live runtime records.
 
-Before making changes, read:
+For installed targets, follow the target bootstrap and `.agent-protocol/AGENTS.md`. Read the installation manifest to identify the selected tracker; do not assume a local task file or GitHub Issue is always required.
 
-1. `AGENTS.md`
-2. `docs/agentic-workflow.md`
-3. `multiagent/protocol.md`
-4. Relevant files under `multiagent/policies/`
-5. The active task file under `multiagent/tasks/`
-
-Follow `AGENTS.md` as the source of truth.
+Canonical workflow: `multiagent/protocol.md`. Do not duplicate its policies here.
